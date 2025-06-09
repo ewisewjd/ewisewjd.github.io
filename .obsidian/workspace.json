@@ -11,14 +11,12 @@
             "id": "d867b3ce30b65dff",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "_posts/2025-06-08-first.md",
-                "mode": "source",
-                "source": false
+                "file": "images/정충원.jpg"
               },
-              "icon": "lucide-file",
-              "title": "2025-06-08-first"
+              "icon": "lucide-image",
+              "title": "정충원"
             }
           },
           {
@@ -35,7 +33,8 @@
               "title": "2025-06-08-first"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -182,7 +181,7 @@
       "command-palette:명령어 팔레트 열기": false
     }
   },
-  "active": "d867b3ce30b65dff",
+  "active": "5c22aa2aedebe566",
   "lastOpenFiles": [
     "images/정충원.jpg",
     "_posts/2025-06-08-first.md",
