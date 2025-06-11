@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-06-08-first.md",
+                "file": "Templates/Post_Template.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-06-08-first"
+              "title": "Post_Template.md"
             }
           }
         ]
@@ -170,25 +170,28 @@
   },
   "active": "5c22aa2aedebe566",
   "lastOpenFiles": [
+    "_site/search/index.html",
+    "_site/search",
+    "_site/_pages/search.md",
+    "_site/_pages",
+    "_pages/search.md",
+    "_posts/2025-06-08-first.md",
+    "_site/google51e63ddd1caa847d.html",
+    "_site/Templates/Post_Template.md/index.html",
+    "_site/Templates/Post_Template.md",
+    "_site/Templates",
     "google51e63ddd1caa847d.html",
     "Templates/Post_Template.md.md",
-    "_posts/2025-06-08-first.md",
     "_posts/2025-06-11.md",
     "_posts/무제.md",
     "Templates",
     "_site/404.html",
     "_site/_pages/404.md",
-    "_site/_pages",
     "_pages/404.md",
     "_site/일상 /first/index.html",
     "_site/일상 /first",
-    "_site/일상 ",
-    "_site/first/index.html",
-    "_site/first",
-    "_site/staticman.yml",
     "_site/screenshot.png",
     "_site/screenshot-layouts.png",
-    "_site/assets/js/main.min.js.map",
     "images/정충원.jpg",
     "images/1642727681917.jpg",
     "정충원.jpg"
