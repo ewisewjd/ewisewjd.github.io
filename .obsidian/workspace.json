@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "7d7a5c0e9e3783c1",
+        "id": "133f240b29f1f869",
         "type": "tabs",
         "children": [
           {
-            "id": "75304b4b98322c1b",
+            "id": "ce627f0184593de9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-01-12-테스트입니다.md",
+                "file": "_pages/categories/category-일상.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-01-12-테스트입니다"
+              "title": "category-일상.md"
             }
           }
         ]
@@ -166,7 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,11 +180,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "75304b4b98322c1b",
+  "active": "ce627f0184593de9",
   "lastOpenFiles": [
-    "_posts/2026-01-12-오랫만.md",
+    "_pages/categories/category-일상.md.md",
     "_pages/category-archive.md",
+    "_pages/categories",
     "_posts/2026-01-12-테스트입니다.md",
+    "_posts/2026-01-12-오랫만.md",
     "_posts/2025-06-08-first.md",
     "Templates/Post_Template.md.md",
     "_includes/mathjax-support.html",
@@ -200,7 +202,6 @@
     "google51e63ddd1caa847d.html",
     "_posts/2025-06-11.md",
     "Templates",
-    "_site/404.html",
     "_site/_pages/404.md",
     "_pages/404.md",
     "_site/screenshot.png",
