@@ -4,39 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "ca3982c19c46d2b3",
+        "id": "7d7a5c0e9e3783c1",
         "type": "tabs",
         "children": [
           {
-            "id": "69ccf6d180897428",
+            "id": "75304b4b98322c1b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-01-12-오랫만.md",
+                "file": "_posts/2026-01-12-테스트입니다.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-01-12-오랫만"
-            }
-          },
-          {
-            "id": "5b946c8764636e62",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2026-01-12-오랫만.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2026-01-12-오랫만"
+              "title": "2026-01-12-테스트입니다"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -195,11 +180,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5b946c8764636e62",
+  "active": "75304b4b98322c1b",
   "lastOpenFiles": [
+    "_posts/2026-01-12-오랫만.md",
     "_pages/category-archive.md",
     "_posts/2026-01-12-테스트입니다.md",
-    "_posts/2026-01-12-오랫만.md",
     "_posts/2025-06-08-first.md",
     "Templates/Post_Template.md.md",
     "_includes/mathjax-support.html",
