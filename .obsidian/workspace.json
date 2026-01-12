@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-06-08-first.md",
+                "file": "_posts/2026-01-12-오랫만.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-06-08-first"
+              "title": "2026-01-12-오랫만"
             }
           }
         ]
@@ -150,28 +150,40 @@
               "icon": "lucide-list",
               "title": "2025-06-08-first 의 개요"
             }
+          },
+          {
+            "id": "1ddecbdfc332679a",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:새 베이스 생성하기": false,
       "switcher:빠른 전환기 열기": false,
       "graph:그래프 뷰 열기": false,
       "canvas:새 캔버스 만들기": false,
       "daily-notes:오늘의 일일 노트 열기": false,
       "templates:템플릿 삽입": false,
-      "command-palette:명령어 팔레트 열기": false
+      "command-palette:명령어 팔레트 열기": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "5c22aa2aedebe566",
   "lastOpenFiles": [
-    "Templates/Post_Template.md.md",
     "_posts/2025-06-08-first.md",
+    "Templates/Post_Template.md.md",
     "_includes/mathjax-support.html",
     "_site/search/index.html",
     "_site/search",
