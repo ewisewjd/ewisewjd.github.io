@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-01-12-테스트입니다.md",
+                "file": "_posts/2026-01-12-오랫만.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-01-12-테스트입니다"
+              "title": "2026-01-12-오랫만"
             }
           }
         ],
@@ -197,10 +197,10 @@
   },
   "active": "5b946c8764636e62",
   "lastOpenFiles": [
-    "_posts/2026-01-12-오랫만.md",
-    "_posts/2026-01-12-테스트입니다.md",
-    "_posts/2025-06-08-first.md",
     "_pages/category-archive.md",
+    "_posts/2026-01-12-테스트입니다.md",
+    "_posts/2026-01-12-오랫만.md",
+    "_posts/2025-06-08-first.md",
     "Templates/Post_Template.md.md",
     "_includes/mathjax-support.html",
     "_site/search/index.html",
@@ -214,7 +214,6 @@
     "_site/Templates",
     "google51e63ddd1caa847d.html",
     "_posts/2025-06-11.md",
-    "_posts/2026-01-12-테스트입니다.md",
     "Templates",
     "_site/404.html",
     "_site/_pages/404.md",
