@@ -19,13 +19,13 @@ docs:
           - title: "프로그래밍"
             children:
               - title: "파이썬"
-                url: /categories/파이썬/
+                url: /categories/#python
               - title: "자바"
-                url: /categories/자바/
+                url: /categories/#java
       - title: "자기계발"
         children:
           - title: "취업 준비"
-            url: /categories/취업-준비/
+            url: /categories/#career
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
