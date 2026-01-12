@@ -11,14 +11,10 @@
             "id": "ce627f0184593de9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2026-01-12-비교분석.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "2026-01-12-비교분석"
+              "title": "새 탭"
             }
           }
         ]
@@ -180,16 +176,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ce627f0184593de9",
+  "active": "1ddecbdfc332679a",
   "lastOpenFiles": [
-    "_posts/2026-01-12-카테고리.md",
     "_posts/2026-01-12-비교분석.md",
+    "_posts/2026-01-12-테스트입니다.md",
+    "_posts/2026-01-12-카테고리.md",
     "_posts/2025-06-08-first.md",
     "_pages/categories/category-일상.md.md",
     "_posts/2026-01-12-오랫만.md",
     "_pages/category-archive.md",
     "_pages/categories",
-    "_posts/2026-01-12-테스트입니다.md",
     "Templates/Post_Template.md.md",
     "_includes/mathjax-support.html",
     "_site/search/index.html",
