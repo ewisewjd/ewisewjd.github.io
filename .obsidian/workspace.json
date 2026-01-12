@@ -166,7 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 326.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,7 +180,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ce627f0184593de9",
+  "active": "1ddecbdfc332679a",
   "lastOpenFiles": [
     "_pages/categories/category-일상.md.md",
     "_pages/category-archive.md",
