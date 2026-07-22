@@ -11,10 +11,14 @@
             "id": "ce627f0184593de9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2026-07-22-컴퓨터공학.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "새 탭"
+              "title": "2026-07-22-컴퓨터공학"
             }
           }
         ]
@@ -176,15 +180,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1ddecbdfc332679a",
+  "active": "ce627f0184593de9",
   "lastOpenFiles": [
+    "_posts/2025-06-08-first.md",
+    "_posts/2026-07-22-컴퓨터공학.md",
+    "_pages/404.md",
+    "_pages/category-archive.md",
+    "_pages/search.md",
+    "_pages/tag-archive.md",
+    "_pages/categories/category-컴퓨터공학.md.md",
+    "_pages/categories/category-일상.md.md",
     "_posts/2026-01-12-비교분석.md",
     "_posts/2026-01-12-테스트입니다.md",
     "_posts/2026-01-12-카테고리.md",
-    "_posts/2025-06-08-first.md",
-    "_pages/categories/category-일상.md.md",
     "_posts/2026-01-12-오랫만.md",
-    "_pages/category-archive.md",
     "_pages/categories",
     "Templates/Post_Template.md.md",
     "_includes/mathjax-support.html",
@@ -192,7 +201,6 @@
     "_site/search",
     "_site/_pages/search.md",
     "_site/_pages",
-    "_pages/search.md",
     "_site/google51e63ddd1caa847d.html",
     "_site/Templates/Post_Template.md/index.html",
     "_site/Templates/Post_Template.md",
@@ -201,7 +209,6 @@
     "_posts/2025-06-11.md",
     "Templates",
     "_site/_pages/404.md",
-    "_pages/404.md",
     "_site/screenshot.png",
     "_site/screenshot-layouts.png",
     "images/정충원.jpg",
