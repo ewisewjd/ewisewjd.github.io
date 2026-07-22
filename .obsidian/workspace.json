@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "133f240b29f1f869",
+        "id": "0c88e40c6272e364",
         "type": "tabs",
         "children": [
           {
-            "id": "ce627f0184593de9",
+            "id": "5a9fbd961b03c1c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "side",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -180,10 +180,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ce627f0184593de9",
+  "active": "5a9fbd961b03c1c0",
   "lastOpenFiles": [
-    "_posts/2025-06-08-first.md",
+    "docs/_docs/10-layouts.md",
     "_posts/2026-07-22-컴퓨터공학.md",
+    "_posts/2025-06-08-first.md",
     "_pages/404.md",
     "_pages/category-archive.md",
     "_pages/search.md",

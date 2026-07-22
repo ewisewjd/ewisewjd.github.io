@@ -16,6 +16,10 @@ docs:
         url: /tags/
       - title: "일상"
         url: /categories/일상/
+      - title: "컴퓨터 공학"
+        url: /categories/컴퓨터공학/
+
+    
       
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
