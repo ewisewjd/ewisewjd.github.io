@@ -1,0 +1,6 @@
+/* Mission 01 CSS */
+:root { --color-bg: #fff; --color-text: #222; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: Arial, sans-serif; }
+section { min-height: 70vh; padding: 80px 20px; }
