@@ -558,3 +558,364 @@ class="btn"은 css에서 버튼처럼 보이게 디자인 하기 위한 클래�
 </a>
 ```
 
+이것도 같은 원리이다. 
+
+클릭하면 id="about"인 섹션으로 이동한다. 
+
+결국 나의 hero섹션에는 두가지 링크가 있는 것이다. 
+
+`#project` : 프로젝트 영역으로 이동
+
+`#about` : 소개 영역으로 이동 
+
+
+이처럼 한 페이지 안에서 특정 세션으로 이동하는 구조를 만들수 있다.
+
+# 질문들 
+
+1. defer 옵션은 거의 필수 와도 같은가?
+
+- 결론부터 말하자면 외부 javascript를 `<head>`에서 불러오고 html 요소를 조작한다면 기본적으로 defer를 사용하는 것이 매우 좋은 선택이고 습관이다. 다만 모든 상황에서 필수는 아니다 
+
+예를 들어 다음 상황에서는 defer를 사용하지 않아도 된다. 
+- 스크립트가 dom요소를 조작하지 않는경우
+- javascript를 `</body>` 바로 앞에 배치하는 경우 
+- 실행 시점이 특별히 중요한 스크립트인 경우 등 
+
+참고로 defer는 외부 스크립트에 사용하는 속성이다. 지금 미션에 경우처럼 외부 js파일을 `<head>`에서 연결하고 잇으니 지금처럼 사용하는것이 적절하다. 
+
+2. id와 class의 차이는 무엇인가?
+
+- 둘다 html 요소에 이름을 붙이는 속성이다. 하지만 사용 목적이 다르다. 
+
+```
+<h1 id="main-title">안녕하세요.</h1>
+```
+
+id는 특정 요소를 식별하는 고유한 이름이다. 
+
+id ="main-title"은 이 요소를 식별하는 이름이다. 
+
+한 문서에서 같은 id를 여로 요소에 중복해서 사용해선 안된다. 
+
+```
+<p class="description">첫 번째 설명</p>
+<p class="description">두 번째 설명</p>
+<p class="description">세 번째 설명</p>
+```
+
+class는 여러 요소를 묶는 분류이름 
+
+여로 요소가 같은 클래스를 가질 수 있다. 
+
+css에서 .description을 지정하면 이 세문단에 동일한 스타일을 적용할 수 있다. 
+
+## 비교하기 
+
+- id="projects" → href="#projects"로 이동할 목적지
+
+- class="section" → 다른 섹션과 공통 디자인을 적용할 때 사용
+
+즉 특정 아이디는 특정 요소를 가리키는 이름, 클래스는 스타일이나 기능을 공유하는 그룹 이름이라고 이해하면 된다. 
+
+물론 자바스크립트에서도 id와 class를 모두 선택할 수 있다. 서로의 사용처가 완전히 제한되는것은 아니다. 
+
+3. 햄버거 버튼을 html에 정의하고 모바일에서만 보이게 할 수 있을까?
+
+- 당연히 가능하다 그리고 html에는 버튼을 항상 작성해두고 css로 모바일에서만 보이도록 처리하는 것이 일반적인 방식이다. 
+
+html은 요소의 구조를 만들고 css는 화면 크기에 따라 보이거나 숨기는 것을 담당한다. 
+지금 현재 html은 그대로 두면 된다. 
+
+```
+<button class="menu-toggle" type="button">
+    ☰
+</button>
+```
+그 다음 css에서 화면 크기에 따라 표시 여부를 결정하는 것이다. 
+
+```
+/* 기본: 데스크톱에서는 햄버거 버튼 숨김 */
+.menu-toggle {
+    display: none;
+}
+
+/* 화면 너비가 768px 이하인 경우 */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+}
+```
+
+이렇게 하면 화면 너비가 768px보다 클때는 버튼이 보이지 않고 화면이 768px이하일 때는 버튼이 표시된다. 
+
+여기서 중요한 것은 @media이다. 
+
+@mediasms 미디어 쿼리라고 부르는데 화면 너비나 기기 특성에 따라 css를 다르게 적용할 수 있도록 해준다. 
+
+미션에서는 모바일 화면에 맞추어 네비게이션 메뉴를 숨기고 , 햄버거 버튼을 표시하는데 사용할수 있다. 또한 햄버거 버튼을 표시하는 것과 메뉴 목록을 열고 닫는 것은 서로 다른 작업니다. 
+
+- css : 모바일에서 햄버거 버튼 표시
+- javascript : 버튼을 클릭하면 메뉴 목록 열기 / 닫기
+
+이렇게 역할이 나뉜다. 
+
+4. href="#hero"에서 #은 어떤 의미를 가지는가?
+
+- `#`은 url에서 현재 문서 안의 특정 위치(fragment)를 가리키는 기호이다. 
+
+내 코드에서 
+
+```
+<a href="#hero">CW. VOYAGE</a>
+```
+
+이 링크를 클릭하면 브라우저는 현재 문서에서 id="hero"인 요소를 찾아 이동한다. 
+
+```
+<section id="hero">
+    ...
+</section>
+```
+
+`#`뒤에는 이동할 요소의 id를 적는다. 
+
+주의할 점은 `#`뒤에 적는 값은 class가 아니라 아이디라는 것이다. 
+
+```
+<a href="#projects">프로젝트</a>
+
+<section id="projects">
+    ...
+</section>
+```
+
+5. aria는 어떤 의미를 가진것인가?
+
+- aria는 Accessible Rich Internet Applications의 약자이다.
+
+한국어로는 접근성 잇는 리치 인터넷 애플리ㅔ이션 정도로 이해하면 된다. 
+
+조금 쉽게 설명하면, 웹페이지를 스크린 리더 같은 보조 기술로 이용하는 사람들에게 html 요소의 역할, 상태, 관계 등을 더 잘 전달하기 위한 속성들이다. 
+
+내 코드에서 사용한 예시를 보자 
+
+```
+<button
+    class="menu-toggle"
+    type="button"
+    aria-label="메뉴 열기"
+    aria-expanded="false"
+    aria-controls="nav-menu">
+    ☰
+</button>
+```
+
+aria-label
+- aria-label="메뉴 열기"
+- 버튼에 표시된 햄버거라는 기호만으로 버튼의 목적을 명확히 알기 어려울 수 있다.
+- aria-lable은 보조 기술에 이 버튼의 목적을 "메뉴 열기"라고 알려주는 역할을 한다. 
+
+aria-expanded
+- aria-expanded="false"
+- 메뉴가 현재 열려 있는지 닫혀 잇는지를 나타내는 상태 정보이다. 
+    - false : 닫혀있음
+    - true: : 열려있음
+- 메뉴를 여닫는 javascript를 만들 때 실제 상태에 맞게 이 값을 변경해 줘야한다. 
+
+aria-controls
+- aria-controls="nav-menu"
+- 이 버튼이 어떤 요소를 제어하는지 알려준다. 
+
+```
+<ul id="nav-menu">
+    ...
+</ul>
+```
+- 즉 이 버튼은 nav-menu라는 메뉴를 제어한다는 관계를 나타내는 것이다. 
+
+중요한점 : aria 속성은 그 자체로 메뉴를 열거나 닫지 않는다 기능은 자바스크립트가 구현하고 aria는 보조 기술에 상태와 의미를 전달하는 역할만 한다.
+
+6. li { display: inline; }를 배웠는데, 왜 여기서는 Flex를 사용하는가?
+
+먼저 내가 배운 코드를 살펴보자 
+
+```
+<style>
+    li {
+        display: inline;
+    }
+</style>
+```
+
+display : inline은 해당 요소를 인라인 형식으로 배치하도록 한다. 
+
+예를 들어 
+
+```
+<ul>
+    <li>About</li>
+    <li>Skills</li>
+    <li>Projects</li>
+</ul>
+```
+는 기본적으로 li는 목록 항목이므로 세로로 표시되지만, display: inline을 적용하면 가로로 이어져서 표시된다. 
+
+그렇다면 flexbox란 뭘까 
+
+flexbox는 요소들을 한방향으로 배치하고 정렬하기 위한 css레이아웃 방식이다. 
+
+```
+.nav-menu {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+}
+```
+
+여기서 display : flex를 지정하면 .nav-menu가 flex 컨테이너가 되고, 그 안에 li 요소들이 flex 아이템으로 배치된다. 
+
+네비게이션 메뉴를 가로로 나열하는 것만 보면 inline도 가능하다 그런데 flexbox는 요소 사이의 간격, 수직 정렬, 공간 분배 등을 더 편리하게 제어할 수 있다. 
+
+또한 여기서 중요한 차이가 있다 .
+
+```
+.nav-menu {
+    display: flex;
+}
+```
+
+이 코드는 li가 아니라 부모인 ul에 display: flex를 지정한 것이다. 
+flexbox는 컨테이너의 직접적인 자식 요소들을 flex 아이템으로 배치한다. 
+
+따라서 ul에 flex를 적용하면 그 안에 li들이 가로로 배치 되는 것이다. 
+
+네비게이션 바 전체도 flex로 구성할 수 있다. 
+
+```
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+```
+
+이렇게 하면 로고, 메뉴, 다크모드 버튼 등을 한줄 로 배치하고 정렬하기 쉬워진다. 
+
+결론은 inline도 가로 배치에 쓸 수 있지만 네비게이션처럼 여러 요소의 정렬과 간격을 유연하게 제어해야하는 레이아웃에서는 flexbox가 더 편리하다. 
+
+7. hero 안에 `<p>`를 여러개 작성하면 css는 어떻게 적용되는가?
+
+- 내 hero를 먼저 다시 살펴보자 
+
+```
+<section id="hero" class="hero">
+
+    <p class="hero-subtitle">THE VOYAGE BEGINS</p>
+
+    <h1>안녕하세요.<br>정충원입니다.</h1>
+
+    <p>History × AI × Data</p>
+
+    <p>역사와 기술을 연결하는 새로운 항해를 시작합니다.</p>
+
+</section>
+```
+- 여기에는 p가 3개 있다 css는 선택자를 통해 어떤 요소에 스타일을 적용할지 결정한다. 
+
+```
+.hero p {
+    color: #5b4636;
+    line-height: 1.8;
+}
+```
+- 여기서 .hero p는 class가 hero인 요소 안에 들어 잇는 모든 p 요소를 선택하라는 것이다. 
+- 따라서 hero 안에 있는 세 개의 p 모두에 글자색과 줄 간격이 적용된다. 
+- 다른 섹션에 p에는 이 규칙이 적용되지 않는다. 
+
+- 그렇다면 특정 p에만 스타일을 적용하려면 어떻게 해야할까?
+- 첫번째 문단에 hero-subtitle이라는 클래스가 있다 
+
+```
+.hero p {
+    color: #5b4636;
+    line-height: 1.8;
+}
+```
+
+그러면 css에서 이렇게 지정할 수 있다. 
+
+```
+.hero p {
+    color: #5b4636;
+    line-height: 1.8;
+}
+```
+
+- 반면에 hero에서 첫번째 , 두번째 , 세번째 p를 구분할 수 도 있다. 
+    - 클래스를 각각 지정할 수도 있지만 css선택자로 순서를 구분하는 방법도 있다. 
+
+```
+.hero p:first-of-type {
+    color: #a17b48;
+}
+
+.hero p:last-of-type {
+    font-size: 18px;
+}
+```
+
+- 그러나 실제 프로젝트에서는 이처럼 순서에 의존하는 선택자보다 의미가 분명한 클래스를 직접 지정하는 방식이 유지보수에 더 편리할 때가 많다. 
+
+```
+<section class="hero">
+    <p class="hero-subtitle">THE VOYAGE BEGINS</p>
+
+    <h1>안녕하세요.<br>정충원입니다.</h1>
+
+    <p>History × AI × Data</p>
+
+    <p>역사와 기술을 연결하는 새로운 항해를 시작합니다.</p>
+</section>
+
+.hero p {
+    color: #5b4636;
+    line-height: 1.8;
+}
+
+.hero .hero-subtitle {
+    color: #a17b48;
+    font-size: 14px;
+    letter-spacing: 4px;
+}
+```
+
+- 여기서 .hero p가 공통 스타일을 담당하고 .hero .hero-subtitle이 첫번째 문단에 추가 스타일을 적용하는것이다. 
+
+- 두 규칙이 서로 다른 속성을 지정하면 둘다 적용되고, 같은 속성을 지정하면 css의 우선 순위와 선언순서 등에 따라 최종 스타일이 결정된다. 
+
+- 핵심은 p를 몇개 작성햇느냐가 아니라 css섴택자가 어떠한 요소를 선택하느냐 이다. 
+
+8. javascript를 바디에 끝부분에 위치하게 하는법
+
+```
+<body>
+    <header>
+        ...
+    </header>
+
+    <main>
+        ...
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+```
+
+- 다음과 같이 javascript를 head가 아니라 body에 배치하는 방식이 있다. 
+
+- 왜 위치가 중요할까 
+
+
+
