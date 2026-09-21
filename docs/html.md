@@ -916,6 +916,254 @@ flexbox는 컨테이너의 직접적인 자식 요소들을 flex 아이템으로
 - 다음과 같이 javascript를 head가 아니라 body에 배치하는 방식이 있다. 
 
 - 왜 위치가 중요할까 
+    - 브라우저가 html을 위에서 부터 읽는다고 생각해보자 
 
+```
+<body>
 
+    <h1>안녕하세요.</h1>
 
+    <button class="menu-toggle">☰</button>
+
+    <script src="js/main.js"></script>
+
+</body>
+```
+- 브라우저가 script 에 도달햇을 때는 그 위에 h1과 button등을 이미 파싱한 상태이다. 그래서 javascript가 다음과 같은 코드를 실행해도 해당 요소를 찾을 수 있다. 
+
+```
+const menuButton = document.querySelector(".menu-toggle");
+```
+- 반대로 스크립트가 html 요소보다 먼저 실행된다면 아직 만들어지지 않은 요소들을 찾으려고 할수 잇다. 
+- 이경우는 defer나 DOMContentLoaded 이벤트 등을 활용해서 해결할 수도 있다. 
+
+9. 모바일 앱은 코틀린이나 스위프트로 만드는데 html로 햄버거 버튼을 만드는 이유는 무엇일까?
+
+- 핵심은 내가 만드는 것이 모바일 앱이 아니라 모바일에서도 사용되는 웹사이트 라는 것이다. 
+- 사용자는 내 포트폴리오 주소를 스마트폰에서 열면 chrome같은 브라우저가 html , css, javascript 를 해석해서 화면을 만들어준다.
+
+즉 , 네이티브 앱을 만드는 것이 아니라서 햄버거 메뉴를 html 로 만드는 것이다. 
+
+10. 기기마다 픽셀값이 다른데 반응형 웹은 어떻게 처리할 까?
+
+- 핵심은 특정 기기 모델이 아니라 , 현재 웹페이지의 표시 영역 너비를 기준으로 레이아웃을 조절하는 것이다. 
+
+- 물리적 픽셀과 css픽셀은 다르다
+    - 스마트폰의 실제 디스플레이는 물리적 픽셀로 구성되어 있다. 
+    - 하지만 웹페이지는 일반적인 css픽셀 이라는 단위를 기준으로 레이아웃을 계산한다. 
+    - 예를 들어 기기의 물리적 픽셀이 1440px라고 해도 브라우저가 웹페이즐 표시하는 css픽샐의 너비는 그보다 작을 수 있다. 
+    - 이 차이는 기기의 픽셀 비율 등이 영향을 준다. 
+    - 따라서 반응형 웹을 만들 때 스마트폰의 물리적 해상도를 기준으로 디자인 하지 않는다.
+
+```
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+```
+- 그렇다면 최소 크기를 지정하면 남는 공간은 어떻게 될까
+    - min-width: 300px → 컨테이너가 300px보다 작아지지 않도록 함
+    - max-width: 1200px → 컨테이너가 1200px보다 커지지 않도록 함
+    - 하지만 모바일 화면이 280px라면 min-width : 300 때문에 컨테이너가 화면보다 커져서 가로 스크롤이 생길수 있다. 
+    - 그래서 모바일에서 전체 페이지에 큰 min-width를 무조건 지정하느것은 피하는게 좋다. 
+    - 대신 콘텐츠에 맞게 최소 크기를 설정하거나 화면이 작아질때 요소들이 줄바꿈 되도록 만드는 게 일반적이다. 
+
+- 넓은 화면에서 남는 공간은 어떻게 처리할까 
+    - 반대로 화면 너비가 1440px인데 콘텐츠의 최대 너비가 1200px라면 남는 공간은 좌우 여백으로 나눌수 있다. 
+
+    - 이때 좌우 여백이 자동으로 배분되서 콘텐츠가 가운데 놓인다. 
+    - 또는 넓은 화면에서도 카드의 개수를 늘리거나 카드 사이의 공간을 늘리는방법도 잇다. 
+    - 내 프로젝트에서는 css grid를 활용하면 편리하다 
+```
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(250px, 1fr)
+    );
+    gap: 24px;
+}
+```
+
+- 이 코드의 의미는 다음과 같다 
+    - 카드 한개는 가능한 한 최소 250px를 확보
+    - 컨테이너에 들어갈 수 있을 만큼 카드 열을 배치
+    - 남는 공간은 1fr을 통해 열 사이에 유연하게 분배
+    - 공간이 부족하면 열 개수를 줄임
+
+즉 화면이 작은 모바일에서는 카드가 한열로 표시될수 있고 넓은 태블릿이나 데스크탑에서는 여러 열로 표시될 수 잇다. 이것이 반응형 웹의 핵심 원리이다. 
+
+- 그렇다면 왜 768px, 1024px 왜 쓰는 것일까
+    - 현재 미션에는 이와 같은 기준에 미ㄹ디어 쿼리가 있다. 
+    - 이 숫자들은 특정 기기의 고유한 화면 크기를 의미한 것이 아니라 레이아웃이 자연스럽게 유지되다가 더이상 보기 좋지 않아지는 지점에서 디자인을 바꾸기 위한 기준점이다. 
+
+```
+
+/* 기본: 모바일 */
+.nav-menu {
+    display: none;
+}
+
+/* 768px 초과: 넓은 화면 */
+@media (min-width: 769px) {
+    .nav-menu {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+```
+
+ - 여기서는 768px 이하에서 메뉴를 숨기고, 769px이상에서 일반 메뉴를 표시하는 예시다. 
+ - 실제 프로젝트에서는 모바일우선 방식으로 기본스타일을 작성하고 화면이 넓어질때 필요한 규직을 추가하는 방식을 사용할 수 잇다. 
+ - 이 기준점이 언제나 정답은 아니다. 메뉴가 깨지거나 카드가 너무 좁아지면 실제 콘텐츠의 배치를 보고 기준을 정하면 된다. 
+
+ # 이어서 
+
+ ## about 섹션 - 자기소개 영역 
+
+ ```
+<section id="about" class="about section">
+    <h2>About Me</h2>
+
+    <div class="about-content">
+        <img src="images/profile.jpg"
+             alt="정충원의 프로필 사진">
+
+        <div class="about-text">
+            <p>안녕하세요. 정충원입니다.</p>
+            <p>History × AI × Data</p>
+        </div>
+    </div>
+</section>
+ ```
+
+### `<section>`- 주제별 콘텐츠 구역
+
+```
+<section id="about" class="about section">
+```
+
+section은 웹페이지의 콘텐츠를 주제별로 묶는 태그다. 
+
+내 포트폴리오에는 about, skills, projects, contact처럼 서로 다른 주제의 영역이 있다. 
+
+그 각각을 section으로 구분할 수 있다.
+
+```
+<section id="about">
+    <h2>About Me</h2>
+    <p>나에 대한 소개</p>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <p>내가 가진 기술</p>
+</section>
+```
+
+이런식으로 구분하면 브라우저나 보조 기술이 문서의 구조를 이해하는데 도움이 된다. 
+
+여기서 주목할 점 
+
+class="about section"
+
+이것은 클래스의 이름이 두개다. 
+- about -> about 영역에서만 적용할 스타일 
+- section -> 여러 섹션에서 공통으로 사용할 스타일 
+html 에서는 하나의 요소에 여러 클래스를 지정할 수 있다. 각 클래스는 공백으로 구분된다. 
+
+css에서는 이렇게 선택할수 있다,
+```
+.about {
+    background-color: beige;
+}
+
+.section {
+    padding: 80px 20px;
+}
+```
+
+그렇다면 about 섹션은 베이지색 배경과 공통 여백을 모두 적용 받을 수 있다. 
+
+### `<div>`- 여러 요소를 묶는 상자 
+
+```
+<div class="about-content">
+    <img src="images/profile.jpg"
+         alt="정충원의 프로필 사진">
+
+    <div class="about-text">
+        <p>안녕하세요. 정충원입니다.</p>
+        <p>History × AI × Data</p>
+    </div>
+</div>
+
+```
+
+div는 특별한 의미를 가진 태그라기 보다는 여러 html 요소를 하나의 그룹으로 묶는 일반적인 컨테이너다. 
+
+예를 들어 프로필 사진과 소개글을 하나의 그룹으로 묶어두면 css둘을 나란히 배치하거나 간격을 조절하기 편해진다. 
+
+```
+.about-content {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+```
+
+이렇게 하면 사진과 소개글을 가로로 배치할 수 잇다. 
+
+기억할 점 : section은 주제별 구역을 의미하고, div는 별도의 의미없이 요소들을 묶는 상자에 가깝다. 
+
+### `<img>`와 alt - 이미지와 대체 텍스트 
+
+```
+<img src="images/profile.jpg"
+     alt="정충원의 프로필 사진">
+
+```
+
+여기서는 src가 이미지 파일의 경로이다. 
+alt는 이미지가 표시되지 않거나 스크린 리더를 사용하는 경우에 이미지의 의미를 전달하는 대체 텍스트이다. 
+
+예를 들어 이미지 파일이 없으면 사진 자체는 표시되지 않을 수 있지만 , alt에 작성한 내용은 대체 정보로 활용 될 수 있다. 
+
+그리고 alt는 단순히 이미지 파일명을 적는곳이 아니다. , 이미지가 전달하려는 의미를 간결하게 설명하는 것이 좋다. 
+
+## skills섹션 - 기술 목록을 구성하는 방법
+
+내 포트폴리오에서는 html , css, javascript, python, sql 과 같은 기술을 소개하는 영역이 잇었다.
+
+이런 목록을 만들때 주로 사용하는것이 ul, li이다 
+
+```
+<section id="skills">
+    <h2>Skills</h2>
+
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>SQL</li>
+    </ul>
+</section>
+```
+
+## projects 섹션 - `<article>`은 왜 사용할까
+
+프로젝트의 카드 처럼 독립적인 콘텐츠를 구성할때는 `<article>`을 사용할 수 있다. 
+
+```
+<section id="projects">
+    <h2>Projects</h2>
+
+    <article class="project-card">
+        <h3>나의 첫 웹페이지</h3>
+        <p>HTML, CSS, JavaScript로 만든 포트폴리오</p>
+        <a href="https://github.com/">GitHub 보기</a>
+    </article>
+</section>
+```
