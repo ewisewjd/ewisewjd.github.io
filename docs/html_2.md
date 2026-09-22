@@ -309,3 +309,188 @@ html 은 버튼과 메뉴같은 요소를 준비하고 javascript는 사용자�
 
 이렇게 html 은 javascript가 조작할 대상의 구조를 제공한다. 
 
+# 질문들 
+
+1. `<form>`태그 완전 정복
+
+먼저 form 은 무슨 역할을 할까 
+
+`<form>`은 사용자가 입력한 정보를 하나의 묶음으로 관리하고 제출할수 있게 만드는 html 요소이다. 
+
+예를 들어 나의 포트폴리오에서는 방문자가 다음의 정보를 입력한다고 해보자 
+- 이름
+- 이메일 
+- 메시지 
+
+이 입력 요소들을 하나의 폼으로 묶으면 사용자가 입력한 값을 검증하고 제출하는 흐름을 만들수 있다. 
+
+내가 작성한 form을 살펴보자 
+
+먼저 바깥쪽 부터 본다면 
+
+```
+<form id="contact-form" novalidate>
+    ...
+    <button type="submit">Send Message</button>
+    <p id="form-status" aria-live="polite"></p>
+</form>
+```
+
+- `<form>` : 입력 요소들을 묶는 폼
+- id="contact-form" : javascript에서 이 폼을 선택하기 위한 식별자 
+- novalidate : 브라우저의 기본 폼 유효성 검사 ui를 비활성화
+- type="submit" : 버튼 클릭시 폼 제출 이벤트 발생
+- id="form-status" : 제출 결과 메시지를 표시할 공간 
+
+여기서 기억해야 할점은 novalidate가 유효성 검사를 완전히 없애는 속성은 아니라는 것이다.
+브라우저가 기본적으로 표시되는 검증 ui는 끄는 것이고 우리는 javascript로 직접 검증을 구현할 수 있다. 
+
+다만 required , type="email" 같은 속성의 제약 조건 자체가 사라지는 것은 아니므로 javascript에서 checkValidity()등을 사용하면 여전히 검증에 활용할 수 있다.
+
+
+input의 속성들 
+
+내 코드에서 이매일 입력 부분을 다시 살펴보자 
+
+```
+<label for="email">Email</label>
+
+<input
+    type="email"
+    id="email"
+    name="email"
+    required>
+```
+
+각 속성의 역할
+
+type="email"
+
+이메일 입력에 적합한 입력 요소를 만들고, 브라우저의 이메일 형식 검증 기능을 제공해.
+
+id="email"
+
+HTML 문서에서 이 요소를 식별해. label 연결이나 JavaScript 선택에 사용할 수 있어.
+
+name="email"
+
+폼 데이터를 전송할 때 이 입력값을 구분하는 이름이야. 서버로 전송한다면 email=입력값처럼 사용될 수 있어.
+
+required
+
+필수 입력 항목이라는 뜻이야. 브라우저 기본 검증이나 JavaScript 검증에서 활용할 수 있어.
+
+
+id와 name은 같은게 아니다. 
+
+이둘은 초보자가 특히 헷갈리기 쉬운데 
+
+```
+<input id="email" name="email">
+```
+- id 는 문서안에서 해당 요소를 찾고 다른 요소와 연결하기 위한 식별자
+- name은 폼 데이터에서 해당 입력값을 식별하는 이름 
+
+둘의 값이 같아도 되지만 역할은 서로 다르다 
+
+form 에서 자주 쓰는 속성
+
+- action : 폼데이터를 전송할 목적지 url
+- methon : 데이터를 어떤 http방식으로 전송할지 지정 (get, post)
+- enctype : 폼 데이터를 어떤 형식으로 인코딩 할지 지정 
+- novalidate : 제출시 브라우저의 기본 유효성 검사 ui를 비활성화
+- autocomplete : 브라우저의 자동완성 기능을 제어
+
+예를 들어 서버에 폼을 제출하는 일반적인 html 형태는 이렇게 쓸 수 있다. 
+
+```
+<form action="/contact" method="post">
+    <label for="name">Name</label>
+    <input id="name" name="name" required>
+
+    <button type="submit">Send</button>
+</form>
+```
+
+여기서 action은 제출 목적지, method="post"는 요청 데이터를 http post 방식으로 보내겠다는 뜻이다. 
+
+그런데 내 미션에서는 서버가 없어도 괜찮으므로 javascript의 submit 이벤트를 받아서 검증하고 성공 메시지를 표시하는 방식으로 요구사항을 구현할 수 있다. 
+
+
+textarea는 왜 input이 아닐까?
+
+내 메시지 입력 부분을 보자 
+
+```
+<label for="message">Message</label>
+
+<textarea
+    id="message"
+    name="message"
+    required></textarea>
+```
+
+input은 일반적으로 한줄 입력에 사용하고 textarea는 여러 줄의 긴 텍스트를 입력할 때 사용한다. 
+
+문의 메시지는 여러 줄로 작성할 수 있어야하므로 textarea 가 적합하다. 
+
+그리고 textarea의 초기 텍스트는 input처럼 value 속성으로 지정하지 않고 여는 태그와 닫는 테그 사이에 작성한다. 
+
+```
+<textarea id="message" name="message">기본 메시지</textarea>
+```
+
+form 에서 가장 중요한 이벤트 : submit 
+
+이부분은 나중에 javascript를 작성할때 다시 만나게 된다. 
+
+```
+<form id="contact-form" novalidate>
+    ...
+    <button type="submit">Send Message</button>
+</form>
+```
+폼 안에서 type="submit"인 버튼을 누르면 폼의 submit 이벤트가 발생한다. 
+
+javascript에서는 다음과 같이 이벤트를 연결 할 수 있다. 
+
+```
+const contactForm = document.querySelector("#contact-form");
+
+contactForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // 입력값 검증
+    // 성공 또는 오류 메시지 표시
+});
+```
+
+여기서 event.preventDefault()는 폼의 기본 제출 동작을 막아준다. 
+
+이걸 사용하는 이유는 우리가 javascript로 입력값을 검증하고 별도의 페이지 이동 없이 결과 메시지를 보여주려는 것이기 때문이다. 
+
+2. head의 meta와 기타 속성들 어떻게 기억할까 
+
+사실은 이부분은 html의 모든 속성을 외우려고 할 필요가 없다. 
+
+head 는 다음과 같다
+
+: 웹페이지를 화면에 보여주기 전에 브라우저에게 이문서를 어떻게 해성하고 준비해야하는지 알려주는 공간
+
+내가 작성한 head를 다시 보자
+
+```
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>정충원 | The Voyage Begins</title>
+    <meta name="description"
+          content="정충원의 역사와 AI, 데이터 탐험 기록">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+```
+
