@@ -415,3 +415,54 @@ main { overflow: clip; }
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* About — handwritten fountain-pen emphasis */
+.about-content {
+    font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+.about-content p {
+    margin: 0 0 18px;
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+.ink-underline {
+    position: relative;
+    display: inline-block;
+    color: var(--color-ink);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.ink-underline svg {
+    position: absolute;
+    left: -3%;
+    bottom: -7px;
+    width: 106%;
+    height: 12px;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.ink-underline path {
+    fill: none;
+    stroke: var(--color-navy);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.ink-underline-long svg {
+    left: -2%;
+    width: 104%;
+}
+
+.about-highlight {
+    margin-top: 26px !important;
+    color: var(--color-ink) !important;
+    font-size: 1.02em;
+}
