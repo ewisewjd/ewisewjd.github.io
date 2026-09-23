@@ -1,304 +1,95 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>정충원 | The Voyage Begins</title>
     <meta name="description" content="정충원의 역사와 AI, 데이터 탐험 기록">
-
-    <!-- CSS 연결 -->
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- JavaScript 연결 -->
+    <link rel="stylesheet" href="css/updates.css">
     <script src="js/main.js" defer></script>
 </head>
-
 <body>
-
-    <!-- HEADER : 로고, 네비게이션, 다크모드 -->
     <header class="site-header">
         <nav class="navigation" aria-label="주요 메뉴">
-
-            <a href="#hero" class="logo">
-                CW. VOYAGE
-            </a>
-
-            <!-- 모바일 햄버거 버튼 -->
-            <button
-                class="menu-toggle"
-                type="button"
-                aria-label="메뉴 열기"
-                aria-expanded="false"
-                aria-controls="nav-menu">
-                ☰
-            </button>
-
-            <!-- 네비게이션 메뉴 -->
+            <a href="#hero" class="logo">CW. VOYAGE</a>
+            <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">☰</button>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#side-projects">Voyages</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#side-projects">Voyages</a></li><li><a href="#contact">Contact</a></li>
             </ul>
-
-            <!-- 다크모드 버튼 -->
-            <button
-                class="theme-toggle"
-                type="button"
-                aria-label="다크 모드 전환">
-                ☾
-            </button>
-
+            <button class="theme-toggle" type="button" aria-label="다크 모드 전환">☾</button>
         </nav>
     </header>
-
-
-    <!-- MAIN : 웹페이지의 주요 콘텐츠 -->
     <main>
-
-        <!-- HERO : 첫 화면 -->
         <section id="hero" class="hero">
-
             <p class="hero-subtitle">THE VOYAGE BEGINS</p>
-
-            <h1>안녕하세요.<br>정충원입니다.</h1>
-
-            <p>History × AI × Data</p>
-
-            <a href="#projects" class="btn">
-                나의 탐험 기록 보기
-            </a>
-
-            <a href="#about" class="scroll-link">
-                SCROLL TO EXPLORE ↓
-            </a>
-
+            <h1>HISTORY × AI × DATA</h1>
+            <p class="hero-tagline" data-text="인문학과 기술을 연결하는 데이터 과학자"></p>
+            <a href="#projects" class="btn">나의 탐험 기록 보기</a>
+            <a href="#about" class="scroll-link">SCROLL TO EXPLORE ↓</a>
         </section>
-
-
-        <!-- ABOUT : 나의 이야기 -->
         <section id="about" class="about section">
-
             <h2>I. ABOUT</h2>
-
             <article class="about-card">
-
-                <img
-                    src="images/profile.jpg"
-                    alt="정충원의 프로필 이미지">
-
-                <div class="about-content">
-                    <h3>나의 이야기</h3>
-                    <p>
-                        이곳에 나의 소개와 관심 분야,
-                        그리고 지금까지의 여정을 작성합니다.
-                    </p>
-                </div>
-
+                <img src="images/profile.jpg" alt="정충원의 프로필 이미지">
+                <div class="about-content"><h3>나의 이야기</h3><p>이곳에 나의 소개와 관심 분야, 그리고 지금까지의 여정을 작성합니다.</p></div>
             </article>
-
         </section>
-
-
-        <!-- SKILLS : 기술 스택 -->
         <section id="skills" class="skills section">
-
-    <h2>II. SKILLS</h2>
-
-    <!-- 현재 보유한 역량 -->
-    <div class="current-skills">
-
-        <h3>Current Skills</h3>
-
-        <article class="skill-group">
-            <h4>Programming & Web</h4>
-            <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-            </ul>
-        </article>
-
-        <article class="skill-group">
-            <h4>Data</h4>
-            <ul>
-                <li>Python</li>
-                <li>SQL</li>
-                <li>ADsP</li>
-                <li>SQLD</li>
-            </ul>
-        </article>
-
-    </div>
-
-
-    <!-- 앞으로 배우고 싶은 기술 -->
-    <div class="future-skills">
-
-        <h3>Future Voyages</h3>
-
-        <article class="skill-group">
-            <h4>Web Development</h4>
-            <ul>
-                <li>TypeScript</li>
-                <li>React</li>
-            </ul>
-        </article>
-
-        <article class="skill-group">
-            <h4>Data & AI</h4>
-            <ul>
-                <li>Machine Learning</li>
-                <li>Deep Learning</li>
-            </ul>
-        </article>
-
-    </div>
-
-</section>
-
-
-        <!-- PROJECTS : GitHub 프로젝트 -->
+            <h2>II. SKILLS</h2>
+            <div class="current-skills"><h3>Current Skills</h3>
+                <article class="skill-group"><h4>Programming &amp; Web</h4><ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></article>
+                <article class="skill-group"><h4>Data</h4><ul><li>Python</li><li>SQL</li><li>ADsP</li><li>SQLD</li></ul></article>
+            </div>
+            <div class="future-skills"><h3>Future Voyages</h3>
+                <article class="skill-group"><h4>Web Development</h4><ul><li>TypeScript</li><li>React</li></ul></article>
+                <article class="skill-group"><h4>Data &amp; AI</h4><ul><li>Machine Learning</li><li>Deep Learning</li></ul></article>
+            </div>
+        </section>
         <section id="projects" class="projects section">
-
             <h2>III. PROJECTS</h2>
-
-            <h3>MY PORTFOLIO</h3>
-
-            <div class="portfolio-grid">
-
-                <article class="project-card">
-                    <h4>Project 01</h4>
-                    <p>첫 번째 프로젝트 소개</p>
-                </article>
-
-                <article class="project-card">
-                    <h4>Project 02</h4>
-                    <p>두 번째 프로젝트 소개</p>
-                </article>
-
-                <article class="project-card">
-                    <h4>Project 03</h4>
-                    <p>세 번째 프로젝트 소개</p>
-                </article>
-
-                <article class="project-card">
-                    <h4>Project 04</h4>
-                    <p>네 번째 프로젝트 소개</p>
-                </article>
-
+            <div class="project-columns">
+                <section class="project-column" aria-labelledby="repositories-title">
+                    <h3 id="repositories-title">MY REPOSITORIES</h3>
+                    <div id="repo-filters" class="repo-filters" aria-label="저장소 언어 필터"></div>
+                    <p id="my-repo-status" aria-live="polite">나의 저장소를 불러오는 중…</p>
+                    <div id="my-repo-grid" class="repo-grid"></div>
+                </section>
+                <section class="project-column" aria-labelledby="portfolio-title">
+                    <h3 id="portfolio-title">MY PORTFOLIO</h3>
+                    <div class="portfolio-grid">
+                        <article class="project-card"><h4>Project 01</h4><p>첫 번째 프로젝트 소개</p></article>
+                        <article class="project-card"><h4>Project 02</h4><p>두 번째 프로젝트 소개</p></article>
+                        <article class="project-card"><h4>Project 03</h4><p>세 번째 프로젝트 소개</p></article>
+                        <article class="project-card"><h4>Project 04</h4><p>네 번째 프로젝트 소개</p></article>
+                    </div>
+                </section>
             </div>
-
-
-            <h3>CODYSSEY MISSIONS</h3>
-
-            <!-- GitHub API 상태 메시지 -->
-            <p id="repo-status" aria-live="polite">
-                프로젝트를 불러올 준비가 되었습니다.
-            </p>
-
-            <!-- API 에러 시 재시도 -->
-            <button id="retry-button" type="button" hidden>
-                다시 시도
-            </button>
-
-            <!-- GitHub API 카드가 들어갈 공간 -->
-            <div id="github-projects" class="projects-grid">
-                <!-- JavaScript로 프로젝트 카드 생성 -->
-            </div>
-
+            <section class="mission-section" aria-labelledby="codyssey-title">
+                <h3 id="codyssey-title">CODYSSEY MISSIONS</h3>
+                <p id="repo-status" aria-live="polite">프로젝트를 불러올 준비가 되었습니다.</p>
+                <button id="retry-button" type="button" hidden>다시 시도</button>
+                <div id="github-projects" class="projects-grid"></div>
+            </section>
         </section>
-
-
-        <!-- SIDE PROJECTS : 새로운 항해 -->
         <section id="side-projects" class="side-projects section">
-
-            <h2>NEW VOYAGES</h2>
-
-            <h3>Side Projects</h3>
-
-            <div class="side-projects-grid">
-
-                <article class="project-card">
-                    <h4>New Voyage 01</h4>
-                    <p>새로운 도전과 아이디어</p>
-                </article>
-
-            </div>
-
+            <h2>NEW VOYAGES</h2><h3>Side Projects</h3>
+            <div class="side-projects-grid"><article class="project-card"><h4>New Voyage 01</h4><p>새로운 도전과 아이디어</p></article></div>
         </section>
-
-
-        <!-- CONTACT : 문의 폼 -->
         <section id="contact" class="contact section">
-
             <h2>V. CONTACT</h2>
-
-            <form id="contact-form" novalidate>
-
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required>
-                    <small class="error-message" id="name-error"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required>
-                    <small class="error-message" id="email-error"></small>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        required></textarea>
-                    <small class="error-message" id="message-error"></small>
-                </div>
-
-                <button type="submit">Send Message</button>
-
-                <p id="form-status" aria-live="polite"></p>
-
-            </form>
-
+            <div class="contact-layout">
+                <div class="contact-copy"><h3>새로운 만남을 기대합니다.</h3><p>좋은 아이디어와 새로운 가능성을 함께 탐구할 분을 기다립니다.</p></div>
+                <form id="contact-form" novalidate>
+                    <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required><small class="error-message" id="name-error"></small></div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required><small class="error-message" id="email-error"></small></div>
+                    <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required></textarea><small class="error-message" id="message-error"></small></div>
+                    <button type="submit">Send Message</button><p id="form-status" aria-live="polite"></p>
+                </form>
+            </div>
         </section>
-
     </main>
-
-
-    <!-- FOOTER : 페이지 하단 -->
-    <footer class="site-footer">
-
-        <p>© 2026 정충원. The Voyage Continues.</p>
-
-        <a href="https://github.com/ewisewjd.github.io">
-            GitHub
-        </a>
-
-    </footer>
-
-
-    <!-- 페이지 맨 위로 이동 -->
-    <button
-        id="scroll-top"
-        type="button"
-        aria-label="맨 위로 이동"
-        hidden>
-        ↑
-    </button>
-
+    <footer class="site-footer"><p>© 2026 정충원. The Voyage Continues.</p><a href="https://github.com/ewisewjd">GitHub</a></footer>
+    <button id="scroll-top" type="button" aria-label="맨 위로 이동" hidden>↑</button>
 </body>
 </html>
