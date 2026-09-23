@@ -9,18 +9,21 @@
     font-size: clamp(2rem, 5.2vw, 4.4rem);
 }
 .hero .hero-tagline {
+    position: relative;
     max-width: 760px;
     min-height: 3.2em;
     margin-top: 20px;
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    letter-spacing: .025em;
+    color: var(--color-ink);
+    font-family: "Nanum Pen Script", cursive;
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    letter-spacing: .02em;
+    clip-path: inset(0 100% 0 0);
+    animation: handwriting-reveal 2.4s cubic-bezier(.22, .75, .25, 1) .35s forwards;
 }
-.hero .hero-tagline::after {
-    content: "▍";
-    margin-left: 3px;
-    animation: caret-blink .8s steps(2, start) infinite;
+@keyframes handwriting-reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
 }
-@keyframes caret-blink { to { visibility: hidden; } }
 
 .project-columns {
     display: grid;
