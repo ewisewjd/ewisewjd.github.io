@@ -466,3 +466,46 @@ main { overflow: clip; }
     color: var(--color-ink) !important;
     font-size: 1.02em;
 }
+
+/* Skills — academic knowledge + technology stack */
+.skills-intro {
+    max-width: 680px;
+    margin: 0 auto 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.skill-group {
+    height: 100%;
+}
+
+.skill-layer {
+    display: grid;
+    gap: 8px;
+}
+
+.skill-label {
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.skill-divider {
+    height: 1px;
+    margin: 16px 0;
+    background: var(--color-line);
+}
+
+.future-domain-card {
+    max-width: 720px;
+    margin-inline: auto;
+}
+
+.future-note {
+    margin: 0;
+    font-size: 0.86rem;
+}
+
