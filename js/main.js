@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.2 });
         revealTargets.forEach((element) => revealObserver.observe(element));
     } else revealTargets.forEach((element) => element.classList.add("is-visible"));
 
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!repoGrid) return;
         repoGrid.replaceChildren();
         const filtered = activeLanguage === "All" ? repositories : repositories.filter((repo) => (repo.language || "Other") === activeLanguage);
-        filtered.slice(0, 4).forEach((repo) => repoGrid.append(makeCard(repo)));
+        filtered.slice(0, 4).map((repo) => makeCard(repo)).forEach((card) => repoGrid.append(card));
         if (filtered.length === 0) {
             const empty = document.createElement("p");
             empty.textContent = "이 언어로 작성된 저장소가 없습니다.";
