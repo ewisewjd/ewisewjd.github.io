@@ -829,3 +829,10 @@ main {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* Classic typography for the voyage theme */
+.hero h1,
+.hero-subtitle {
+    font-family: "Cormorant Garamond", serif;
+}
