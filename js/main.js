@@ -47,24 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateScrollUI();
     scrollTopButton?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
-    // Typewriter tagline (respects reduced-motion preference)
-    const tagline = document.querySelector(".hero-tagline");
-    if (tagline) {
-        const text = tagline.dataset.text || "인문학과 기술을 연결하는 데이터 과학자";
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) tagline.textContent = text;
-        else {
-            tagline.textContent = "";
-            let index = 0;
-            const typeNext = () => {
-                if (index < text.length) {
-                    tagline.textContent += text.charAt(index++);
-                    window.setTimeout(typeNext, 85);
-                }
-            };
-            typeNext();
-        }
-    }
-
+    // Hero tagline uses a CSS handwriting-style reveal animation.
     // Reveal sections as they enter the viewport
     const revealTargets = document.querySelectorAll(".section, .about-card, .skill-group, .project-card");
     if ("IntersectionObserver" in window) {
