@@ -14,8 +14,8 @@
     min-height: 3.2em;
     margin-top: 20px;
     color: var(--color-ink);
-    font-family: "Nanum Pen Script", cursive;
-    font-size: clamp(1.45rem, 3vw, 2rem);
+    font-family: "Noto Serif KR", serif;
+    font-size: clamp(1.05rem, 2.1vw, 1.35rem);
     letter-spacing: .02em;
     clip-path: inset(0 100% 0 0);
     animation: handwriting-reveal 2.4s cubic-bezier(.22, .75, .25, 1) .35s forwards;
