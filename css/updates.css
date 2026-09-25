@@ -223,8 +223,8 @@ body{
 .repo-filter{padding:4px 8px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.68rem}
 .repo-filter[aria-pressed="true"]{border-color:var(--voyage-navy);background:var(--voyage-navy);color:var(--voyage-paper)}
 .repo-grid{
-    display:block;
     min-width:0;
+    width:100%;
 }
 .repo-page{
     display:grid;
@@ -233,11 +233,10 @@ body{
     gap:10px;
     width:100%;
 }
-.repo-page + .repo-page{
-    margin-top:10px;
-}
+.repo-page + .repo-page{ margin-top:10px; }
 .repo-grid.is-scrollable{
     display:flex;
+    flex-wrap:nowrap;
     width:100%;
     overflow-x:auto;
     overflow-y:hidden;
@@ -250,13 +249,26 @@ body{
 .repo-grid.is-scrollable .repo-page{
     flex:0 0 100%;
     width:100%;
+    min-width:100%;
+    margin:0;
     scroll-snap-align:start;
 }
 .repo-page.is-partial{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    width:calc((100% - 10px) / 3);
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    width:100%;
 }
 .repo-grid .project-card{
+    min-width:0;
+}
+.repo-grid .project-card h4,
+.repo-grid .project-card h4 a{
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+.project-card{
     min-width:0;
 }
 .repo-grid .project-card h4,
@@ -345,12 +357,16 @@ body{
     word-break:break-word;
 }
 
-@media(max-width:1100px) and (min-width:768px){
-    .repo-page{grid-template-columns:repeat(4,minmax(0,1fr));}
-    .repo-page.is-partial{grid-template-columns:repeat(2,minmax(0,1fr));width:calc((100% - 10px) / 2);}
-}
+
+
+
 @media(max-width:767px){
-    .repo-page{grid-template-columns:repeat(2,minmax(0,1fr));}
-    .repo-page.is-partial{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;}
-    .repo-grid.is-scrollable .repo-page{flex-basis:100%;}
+    .repo-page{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-rows:repeat(6,minmax(0,auto));
+    }
+    .repo-page.is-partial{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        grid-template-rows:repeat(2,minmax(0,auto));
+    }
 }
