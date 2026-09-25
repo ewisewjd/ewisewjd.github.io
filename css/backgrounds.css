@@ -1,0 +1,81 @@
+/* Generated voyage artwork: light/dark map backgrounds and compass */
+
+body {
+    background-color: var(--voyage-paper, #faf7ef);
+    background-image:
+        linear-gradient(rgba(250, 247, 239, 0.72), rgba(250, 247, 239, 0.72)),
+        url("../assets/images/light_mode.png");
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+html[data-theme="dark"] body {
+    background-color: var(--voyage-paper, #1a2b36);
+    background-image:
+        linear-gradient(rgba(19, 34, 44, 0.78), rgba(19, 34, 44, 0.78)),
+        url("../assets/images/dark_mode.png");
+}
+
+.hero {
+    isolation: isolate;
+}
+
+.hero > *:not(.hero-compass) {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-compass {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: clamp(24px, 5vw, 76px);
+    width: clamp(180px, 27vw, 360px);
+    height: auto;
+    opacity: 0.72;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .hero h1,
+    .hero .hero-tagline,
+    .hero .btn {
+        max-width: 62%;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        background-attachment: scroll;
+        background-size: auto 100%;
+    }
+
+    .hero {
+        min-height: 620px;
+        padding-right: 24px;
+    }
+
+    .hero-compass {
+        top: 24%;
+        right: -34px;
+        width: 190px;
+        opacity: 0.22;
+        transform: translateY(-50%);
+    }
+
+    .hero h1,
+    .hero .hero-tagline,
+    .hero .btn {
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-compass {
+        transform: translateY(-50%);
+    }
+}
