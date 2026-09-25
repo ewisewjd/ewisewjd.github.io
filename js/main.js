@@ -128,7 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!repoGrid) return;
         repoGrid.replaceChildren();
         const filtered = activeLanguage === "All" ? repositories : repositories.filter((repo) => (repo.language || "Other") === activeLanguage);
-        filtered.slice(0, 4).map((repo) => makeCard(repo)).forEach((card) => repoGrid.append(card));
+        repoGrid.classList.toggle("is-scrollable", filtered.length > 8);
+        filtered.map((repo) => makeCard(repo)).forEach((card) => repoGrid.append(card));
         if (filtered.length === 0) {
             const empty = document.createElement("p");
             empty.textContent = "이 언어로 작성된 저장소가 없습니다.";
@@ -185,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             renderFilters();
             renderRepoCards();
-            setStatus(repoStatus, `공개 저장소 ${repositories.length}개 중 최근 저장소를 표시합니다.`);
+            setStatus(repoStatus, `공개 저장소 ${repositories.length}개를 표시합니다.`);
 
             const missions = repositories.filter((repo) => /codyssey|mission|미션/i.test(`${repo.name} ${repo.description || ""}`));
             if (missionGrid && missions.length) {
