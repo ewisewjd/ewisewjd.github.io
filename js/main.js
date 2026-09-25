@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const missions = repositories.filter((repo) => /codyssey|mission|미션/i.test(`${repo.name} ${repo.description || ""}`));
             if (missionGrid && missions.length) {
-                missions.slice(0, 4).forEach((repo) => missionGrid.append(makeCard(repo, true)));
+                missions.slice(0, 8).forEach((repo) => missionGrid.append(makeCard(repo, true)));
                 setStatus(missionStatus, `Codyssey/미션 관련 저장소 ${missions.length}개를 찾았습니다.`);
             } else {
                 setStatus(missionStatus, "Codyssey 또는 mission이 이름·설명에 포함된 공개 저장소가 아직 없습니다.", "empty");
