@@ -1,81 +1,45 @@
-/* Generated voyage artwork: light/dark map backgrounds and compass */
+/* Generated voyage artwork: light/dark section backgrounds */
 
+/* Keep the page itself calm; the generated artwork belongs to the section surfaces. */
 body {
     background-color: var(--voyage-paper, #faf7ef);
-    background-image:
-        linear-gradient(rgba(250, 247, 239, 0.72), rgba(250, 247, 239, 0.72)),
-        url("../assets/images/light_mode.png");
-    background-position: center top;
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-image: none;
 }
 
 html[data-theme="dark"] body {
     background-color: var(--voyage-paper, #1a2b36);
+    background-image: none;
+}
+
+/* Generated map artwork sits behind the content of each journal section. */
+.section {
+    background-color: var(--voyage-paper, #faf7ef);
     background-image:
-        linear-gradient(rgba(19, 34, 44, 0.78), rgba(19, 34, 44, 0.78)),
+        linear-gradient(rgba(250, 247, 239, 0.78), rgba(250, 247, 239, 0.78)),
+        url("../assets/images/light_mode.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+html[data-theme="dark"] .section {
+    background-color: var(--voyage-paper, #1a2b36);
+    background-image:
+        linear-gradient(rgba(19, 34, 44, 0.80), rgba(19, 34, 44, 0.80)),
         url("../assets/images/dark_mode.png");
 }
 
+/* Keep the Hero as a clean opening page rather than putting the map artwork behind it. */
 .hero {
-    isolation: isolate;
-}
-
-.hero > *:not(.hero-compass) {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-compass {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    right: clamp(24px, 5vw, 76px);
-    width: clamp(180px, 27vw, 360px);
-    height: auto;
-    opacity: 0.72;
-    transform: translateY(-50%);
-    pointer-events: none;
-    user-select: none;
-}
-
-@media (min-width: 768px) {
-    .hero h1,
-    .hero .hero-tagline,
-    .hero .btn {
-        max-width: 62%;
-    }
+    background-image:
+        radial-gradient(circle at 14% 24%, transparent 0 30px, var(--voyage-map) 31px, transparent 32px),
+        radial-gradient(circle at 86% 70%, transparent 0 58px, var(--voyage-map) 59px, transparent 60px),
+        repeating-linear-gradient(25deg, transparent 0 120px, var(--voyage-map) 121px, transparent 122px);
 }
 
 @media (max-width: 767px) {
-    body {
+    .section {
         background-attachment: scroll;
-        background-size: auto 100%;
-    }
-
-    .hero {
-        min-height: 620px;
-        padding-right: 24px;
-    }
-
-    .hero-compass {
-        top: 24%;
-        right: -34px;
-        width: 190px;
-        opacity: 0.22;
-        transform: translateY(-50%);
-    }
-
-    .hero h1,
-    .hero .hero-tagline,
-    .hero .btn {
-        max-width: 100%;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hero-compass {
-        transform: translateY(-50%);
+        background-position: center center;
     }
 }
