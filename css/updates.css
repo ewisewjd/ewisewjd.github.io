@@ -215,7 +215,7 @@ body{
 .skill-label{color:var(--voyage-red);font-family:var(--font-heading);font-size:.68rem;letter-spacing:.08em}
 .skill-group li{padding:3px 8px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.68rem}
 .skill-divider{margin:13px 0;background:var(--voyage-line)}
-.project-columns{position:relative;z-index:1;margin-top:32px;gap:22px}
+.project-columns{position:relative;z-index:1;margin-top:32px;gap:22px;grid-template-columns:1fr}
 .subsection-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
 .subsection-heading h3{margin:0;color:var(--voyage-ink);font-family:var(--font-heading);font-size:.92rem;letter-spacing:.08em}
 .subsection-heading span{color:var(--voyage-ink-soft);font-family:var(--font-heading);font-size:.64rem}
@@ -223,12 +223,50 @@ body{
 .repo-filter{padding:4px 8px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.68rem}
 .repo-filter[aria-pressed="true"]{border-color:var(--voyage-navy);background:var(--voyage-navy);color:var(--voyage-paper)}
 .repo-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
+    display:block;
     min-width:0;
 }
+.repo-page{
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:10px;
+    width:100%;
+}
+.repo-page + .repo-page{
+    margin-top:10px;
+}
+.repo-grid.is-scrollable{
+    display:flex;
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    gap:0;
+    padding:2px 2px 12px;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:thin;
+}
+.repo-grid.is-scrollable .repo-page{
+    flex:0 0 100%;
+    width:100%;
+    scroll-snap-align:start;
+}
+.repo-page.is-partial{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    width:calc((100% - 10px) / 3);
+}
 .repo-grid .project-card{
+    min-width:0;
+}
+.repo-grid .project-card h4,
+.repo-grid .project-card h4 a{
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+.project-card{
     min-width:0;
 }
 .repo-grid .project-card h4,
@@ -290,7 +328,7 @@ body{
  .section-journal-link{top:20px}.current-skills{grid-template-columns:1fr}.repo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(min-width:768px){
- .nav-menu{order:3;margin-left:auto;box-shadow:none;background:transparent}.theme-toggle{order:4}.project-columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .nav-menu{order:3;margin-left:auto;box-shadow:none;background:transparent}.theme-toggle{order:4}.project-columns{grid-template-columns:1fr}
  .project-column+.project-column{padding-left:22px}.contact-layout{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px}
 }
 @media(min-width:1024px){.hero{min-height:790px}.section{min-height:560px}}
@@ -299,18 +337,20 @@ body{
  .hero-tagline.typing::after{animation:none}
 }
 /* GitHub repository cards stay inside their own cards, including long names. */
-.repo-grid .project-card h4,
-.repo-grid .project-card h4 a,
 .projects-grid .project-card h4,
 .projects-grid .project-card h4 a {
-    min-width: 0;
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
 }
 
+@media(max-width:1100px) and (min-width:768px){
+    .repo-page{grid-template-columns:repeat(4,minmax(0,1fr));}
+    .repo-page.is-partial{grid-template-columns:repeat(2,minmax(0,1fr));width:calc((100% - 10px) / 2);}
+}
 @media(max-width:767px){
-    .repo-grid.is-scrollable .project-card{
-        flex-basis:82%;
-    }
+    .repo-page{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .repo-page.is-partial{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;}
+    .repo-grid.is-scrollable .repo-page{flex-basis:100%;}
 }
