@@ -109,3 +109,163 @@
     .repo-grid { grid-template-columns: 1fr; }
     .hero { padding-inline: 24px; }
 }
+
+
+/* =========================================================
+   Reference design: parchment voyage journal
+   ========================================================= */
+:root{
+ --voyage-paper:#faf7ef;--voyage-paper-deep:#eadfc8;--voyage-ink:#282828;
+ --voyage-ink-soft:#5f625f;--voyage-navy:#19364a;--voyage-navy-light:#31566d;
+ --voyage-red:#8b1e1e;--voyage-line:#c9b99b;--voyage-shadow:rgba(74,57,32,.16);
+ --voyage-map:rgba(113,99,76,.10);
+}
+[data-theme="dark"]{
+ --voyage-paper:#1a2b36;--voyage-paper-deep:#182a35;--voyage-ink:#eee9dc;
+ --voyage-ink-soft:#c2c6c4;--voyage-navy:#c6d6d9;--voyage-navy-light:#e0e8e8;
+ --voyage-red:#d77b70;--voyage-line:#52616a;--voyage-shadow:rgba(0,0,0,.32);
+ --voyage-map:rgba(210,198,166,.08);
+}
+body{
+ color:var(--voyage-ink);background-color:var(--voyage-paper);
+ background-image:radial-gradient(circle at 15% 12%,rgba(139,30,30,.035),transparent 23%),
+ radial-gradient(circle at 84% 70%,rgba(25,54,74,.045),transparent 28%),
+ repeating-linear-gradient(0deg,transparent 0 31px,var(--voyage-map) 32px,transparent 33px),
+ repeating-linear-gradient(90deg,transparent 0 43px,var(--voyage-map) 44px,transparent 45px);
+}
+[data-theme="dark"] body{
+ background-image:radial-gradient(circle at 15% 12%,rgba(215,123,112,.06),transparent 24%),
+ radial-gradient(circle at 84% 70%,rgba(126,166,187,.08),transparent 28%),
+ repeating-linear-gradient(0deg,transparent 0 31px,var(--voyage-map) 32px,transparent 33px),
+ repeating-linear-gradient(90deg,transparent 0 43px,var(--voyage-map) 44px,transparent 45px);
+}
+.site-header{background:rgba(247,240,223,.72);border-bottom-color:transparent}
+[data-theme="dark"] .site-header{background:rgba(16,28,36,.80)}
+.site-header.scrolled{background:var(--voyage-paper);border-bottom-color:var(--voyage-line)}
+.journal-toggle{
+ order:2;min-width:82px;gap:7px;padding-inline:12px;border-color:var(--voyage-line);
+ border-radius:5px;color:var(--voyage-ink);background:linear-gradient(135deg,var(--voyage-paper-deep),var(--voyage-paper));
+ box-shadow:0 3px 8px var(--voyage-shadow);font-family:var(--font-heading);font-size:.84rem;letter-spacing:.04em;
+}
+.nav-menu{z-index:1200;border-color:var(--voyage-line);border-radius:5px;background:var(--voyage-paper)}
+.nav-menu a{color:var(--voyage-ink-soft);font-family:var(--font-heading);letter-spacing:.03em}
+.nav-menu a:hover,.nav-menu a:focus-visible{color:var(--voyage-ink);background:var(--voyage-paper-deep)}
+.theme-toggle{order:4;border-color:var(--voyage-line);border-radius:50%;background:var(--voyage-paper)}
+.hero{
+ min-height:min(820px,100svh);width:min(calc(100% - 28px),1180px);margin-inline:auto;
+ margin-top:calc(var(--header-height) + 16px);padding:clamp(110px,15vh,150px) clamp(28px,7vw,90px) 90px;
+ border:1px solid var(--voyage-line);border-radius:5px;background-color:var(--voyage-paper);
+ background-image:radial-gradient(circle at 14% 24%,transparent 0 30px,var(--voyage-map) 31px,transparent 32px),
+ radial-gradient(circle at 86% 70%,transparent 0 58px,var(--voyage-map) 59px,transparent 60px),
+ repeating-linear-gradient(25deg,transparent 0 120px,var(--voyage-map) 121px,transparent 122px);
+ box-shadow:0 16px 38px var(--voyage-shadow);overflow:hidden;
+}
+.hero::before{inset:12px;border-color:var(--voyage-line);border-radius:3px;opacity:.72}
+.hero::after{right:5%;bottom:8%;width:clamp(120px,18vw,220px);border-color:var(--voyage-map);
+ background:repeating-conic-gradient(from 0deg,transparent 0 14deg,var(--voyage-map) 14deg 15deg);opacity:.9}
+.hero-page-mark{
+ position:absolute;top:30px;left:30px;display:grid;place-items:center;width:34px;height:34px;
+ border:1px solid var(--voyage-ink-soft);border-radius:50%;color:var(--voyage-ink);font-size:1.05rem
+}
+.hero-subtitle{margin-bottom:20px;color:var(--voyage-ink-soft);font-family:var(--font-heading);font-size:.72rem;letter-spacing:.16em}
+.hero h1{max-width:760px;font-size:clamp(2.5rem,7vw,5.4rem);letter-spacing:.015em}
+.hero-intro{margin:14px 0 0!important;color:var(--voyage-ink)!important;font-family:var(--font-heading);font-size:clamp(1.05rem,2vw,1.3rem)!important;font-weight:600;letter-spacing:.04em!important}
+.hero-focus{margin:6px 0 0!important;color:var(--voyage-navy)!important;font-family:var(--font-heading);font-size:.85rem!important;letter-spacing:.13em!important}
+.hero .hero-tagline{width:min(100%,620px);min-height:1.8em;margin:22px auto 0;color:var(--voyage-ink)!important;font-family:"Noto Serif KR",serif;font-size:clamp(1rem,2.2vw,1.18rem);clip-path:none}
+.hero-tagline.typing::after{display:inline-block;width:1px;height:1em;margin-left:3px;vertical-align:-.12em;background:currentColor;content:"";animation:cursor-blink .9s steps(1) infinite}
+@keyframes cursor-blink{50%{opacity:0}}
+.hero-description{margin:16px 0 0!important;color:var(--voyage-ink-soft)!important;font-size:.84rem!important;line-height:1.85!important}
+.hero .btn{margin-top:28px;border-color:var(--voyage-navy);border-radius:4px;color:var(--voyage-paper);background:var(--voyage-navy);box-shadow:0 5px 12px var(--voyage-shadow);font-family:var(--font-heading);letter-spacing:.06em}
+[data-theme="dark"] .hero .btn{color:#12202a}
+.scroll-link{bottom:18px;color:var(--voyage-ink-soft);gap:1px;font-family:var(--font-heading);font-size:.64rem;letter-spacing:.08em}
+.scroll-link span:first-child{font-size:.8rem}
+.section{
+ position:relative;width:min(calc(100% - 28px),1180px);margin:26px auto 0;padding:clamp(56px,7vw,86px) clamp(18px,5vw,60px);
+ border:1px solid var(--voyage-line);border-radius:5px;background-color:var(--voyage-paper);
+ background-image:radial-gradient(circle at 92% 10%,transparent 0 44px,var(--voyage-map) 45px,transparent 46px),
+ radial-gradient(circle at 8% 90%,transparent 0 36px,var(--voyage-map) 37px,transparent 38px),
+ repeating-linear-gradient(145deg,transparent 0 150px,var(--voyage-map) 151px,transparent 152px);
+ box-shadow:0 12px 30px var(--voyage-shadow);scroll-margin-top:calc(var(--header-height) + 28px)
+}
+.section::after{position:absolute;right:20px;bottom:18px;width:64px;height:64px;border:1px solid var(--voyage-map);border-radius:50%;background:repeating-conic-gradient(from 0deg,transparent 0 15deg,var(--voyage-map) 15deg 16deg);content:"";pointer-events:none}
+.section>h2{position:relative;z-index:1;margin-bottom:6px;color:var(--voyage-ink);font-family:var(--font-heading);font-size:clamp(1.7rem,3.6vw,2.35rem);letter-spacing:.05em}
+.section-subtitle{position:relative;z-index:1;margin:0 auto;color:var(--voyage-ink-soft)!important;font-size:.76rem;text-align:center}
+.section-journal-link{position:absolute;top:22px;left:24px;z-index:3;color:var(--voyage-ink-soft);font-family:var(--font-heading);font-size:.68rem}
+.section-journal-link:hover{color:var(--voyage-red)}
+.about-card,.skill-group,.project-card,#contact-form{
+ border-color:var(--voyage-line);border-radius:4px;background:rgba(250,247,239,.76);box-shadow:0 7px 18px var(--voyage-shadow)
+}
+[data-theme="dark"] .about-card,[data-theme="dark"] .skill-group,[data-theme="dark"] .project-card,[data-theme="dark"] #contact-form{background:rgba(24,39,49,.82)}
+.about-card{position:relative;z-index:1;max-width:900px;margin-top:34px;padding:clamp(22px,4vw,38px)}
+.about-card img{width:106px;height:106px;border-color:var(--voyage-line)}
+.about-identity h3{margin:0;font-family:var(--font-heading);font-size:1.25rem}
+.about-identity p{margin:0 0 14px;font-family:var(--font-heading);font-size:.72rem}
+.about-content p{font-size:.84rem;line-height:1.85}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.about-tags span{padding:4px 9px;border:1px solid var(--voyage-line);border-radius:999px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.7rem}
+.about-more{margin-top:24px;padding-top:18px;border-top:1px solid var(--voyage-line)}
+.about-more h4{margin:0 0 8px;font-family:var(--font-heading);font-size:.88rem}
+.about-more ul{margin:0;padding-left:16px;color:var(--voyage-ink-soft);font-size:.76rem}
+.skills-intro{position:relative;z-index:1;margin:18px auto 0;font-size:.78rem;text-align:center}
+.current-skills{position:relative;z-index:1;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:30px}
+.current-skills>h3,.future-skills>h3{margin-bottom:4px;color:var(--voyage-ink);font-family:var(--font-heading);font-size:1rem;text-align:left}
+.skill-group{position:relative;padding:20px 18px}
+.skill-icon{float:right;display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--voyage-line);border-radius:50%;color:var(--voyage-navy);font-size:1.3rem}
+.skill-group h4{margin-right:52px;font-family:var(--font-heading);font-size:1rem}
+.skill-layer{clear:both;padding-top:2px}
+.skill-label{color:var(--voyage-red);font-family:var(--font-heading);font-size:.68rem;letter-spacing:.08em}
+.skill-group li{padding:3px 8px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.68rem}
+.skill-divider{margin:13px 0;background:var(--voyage-line)}
+.project-columns{position:relative;z-index:1;margin-top:32px;gap:22px}
+.subsection-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.subsection-heading h3{margin:0;color:var(--voyage-ink);font-family:var(--font-heading);font-size:.92rem;letter-spacing:.08em}
+.subsection-heading span{color:var(--voyage-ink-soft);font-family:var(--font-heading);font-size:.64rem}
+.repo-filters{gap:5px;margin-bottom:12px}
+.repo-filter{padding:4px 8px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.68rem}
+.repo-filter[aria-pressed="true"]{border-color:var(--voyage-navy);background:var(--voyage-navy);color:var(--voyage-paper)}
+.repo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.project-card{position:relative}
+.project-card:hover{transform:translateY(-3px);border-color:var(--voyage-navy)}
+.project-thumb{height:74px;margin:-2px -2px 12px;border:1px solid var(--voyage-line);border-radius:3px;background-color:var(--voyage-navy);background-image:linear-gradient(135deg,rgba(255,255,255,.10),transparent 50%),repeating-linear-gradient(165deg,transparent 0 13px,rgba(255,255,255,.08) 14px,transparent 15px)}
+.thumb-code{background-color:#243b4b}
+.thumb-map{background-color:#7c735e;background-image:repeating-radial-gradient(ellipse at 40% 55%,transparent 0 14px,rgba(250,247,239,.18) 15px 16px,transparent 17px 27px)}
+.thumb-ai{background-color:#1c3d55}
+.thumb-library{background-color:#634f3c}
+.thumb-chart{background-color:#1b435a}
+.thumb-mountain{background-color:#3e5a67}
+.project-card h4{font-family:var(--font-heading);font-size:.88rem}
+.project-card p{font-size:.72rem;line-height:1.55}
+.project-arrow{position:absolute;right:14px;bottom:12px;color:var(--voyage-navy)}
+.mission-section{position:relative;z-index:1;margin-top:30px;padding-top:24px;border-top-color:var(--voyage-line)}
+#my-repo-status,#repo-status{padding:10px 12px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);font-size:.7rem}
+.contact-layout{position:relative;z-index:1;margin-top:32px}
+.contact-copy h3{font-family:var(--font-heading);font-size:clamp(1.25rem,3vw,1.8rem)}
+.contact-copy p{font-size:.8rem}
+.contact-socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.contact-socials a{padding-bottom:2px;border-bottom:1px solid var(--voyage-line);color:var(--voyage-ink);font-family:var(--font-heading);font-size:.78rem}
+#contact-form{border-color:var(--voyage-line);border-radius:4px}
+.form-group label{font-family:var(--font-heading);font-size:.78rem}
+.form-group input,.form-group textarea{border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper)}
+#contact-form button[type="submit"]{border-color:var(--voyage-navy);border-radius:3px;background:var(--voyage-navy);color:var(--voyage-paper);font-family:var(--font-heading);letter-spacing:.08em}
+[data-theme="dark"] #contact-form button[type="submit"]{color:#12202a}
+.site-footer{margin-top:26px;border-top-color:var(--voyage-line);background:var(--voyage-paper-deep)}
+#scroll-top{border-color:var(--voyage-line);background:var(--voyage-paper)}
+.js-ready .section,.js-ready .about-card,.js-ready .skill-group,.js-ready .project-card{opacity:0;transform:translateY(18px);transition:opacity 650ms ease,transform 650ms ease,box-shadow 180ms ease,border-color 180ms ease}
+.js-ready .section.is-visible,.js-ready .about-card.is-visible,.js-ready .skill-group.is-visible,.js-ready .project-card.is-visible{opacity:1;transform:translateY(0)}
+@media(max-width:767px){
+ .site-header{pointer-events:none;background:transparent;border:0;backdrop-filter:none}.navigation{min-height:0;pointer-events:none}
+ .logo,.nav-menu,.theme-toggle,.journal-toggle{pointer-events:auto}.logo{position:fixed;top:13px;left:16px;z-index:1100;padding:4px 8px;border:1px solid var(--voyage-line);border-radius:4px;background:var(--voyage-paper);box-shadow:0 4px 12px var(--voyage-shadow)}
+ .logo img{height:34px;max-width:100px}.journal-toggle{position:fixed;top:14px;right:68px;z-index:1100;display:inline-grid}.theme-toggle{position:fixed;top:14px;right:16px;z-index:1100;margin:0}
+ .nav-menu{top:68px;right:16px;left:auto;width:min(270px,calc(100vw - 32px))}
+ .hero{min-height:720px;margin-top:76px;padding-top:120px}.hero-page-mark{top:26px;left:26px}.section{margin-top:20px;padding-top:64px}
+ .section-journal-link{top:20px}.current-skills{grid-template-columns:1fr}.repo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:768px){
+ .nav-menu{order:3;margin-left:auto;box-shadow:none;background:transparent}.theme-toggle{order:4}.project-columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .project-column+.project-column{padding-left:22px}.contact-layout{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px}
+}
+@media(min-width:1024px){.hero{min-height:790px}.section{min-height:560px}}
+@media(prefers-reduced-motion:reduce){
+ .js-ready .section,.js-ready .about-card,.js-ready .skill-group,.js-ready .project-card{opacity:1;transform:none;transition:none}
+ .hero-tagline.typing::after{animation:none}
+}
