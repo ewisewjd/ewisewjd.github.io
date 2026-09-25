@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const username = "ewisewjd";
     const repoGrid = document.querySelector("#my-repo-grid");
     const repoStatus = document.querySelector("#my-repo-status");
+    const repoPageControls = document.querySelector("#repo-page-controls");
     const filters = document.querySelector("#repo-filters");
     const missionGrid = document.querySelector("#github-projects");
     const missionStatus = document.querySelector("#repo-status");
@@ -132,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             : repositories.filter((repo) => (repo.language || "Other") === activeLanguage);
 
         const pageSize = 12;
+        const pages = [];
         repoGrid.classList.toggle("is-scrollable", filtered.length > pageSize);
 
         for (let start = 0; start < filtered.length; start += pageSize) {
@@ -139,9 +141,36 @@ document.addEventListener("DOMContentLoaded", () => {
             const page = document.createElement("div");
             page.className = "repo-page";
             if (pageRepos.length < pageSize) page.classList.add("is-partial");
-
             pageRepos.forEach((repo) => page.append(makeCard(repo)));
             repoGrid.append(page);
+            pages.push(page);
+        }
+
+        if (repoPageControls) {
+            repoPageControls.replaceChildren();
+            if (pages.length > 1) {
+                pages.forEach((_, index) => {
+                    const dot = document.createElement("button");
+                    dot.type = "button";
+                    dot.className = "repo-page-dot";
+                    dot.setAttribute("aria-label", `저장소 ${index + 1}페이지 보기`);
+                    dot.setAttribute("aria-current", String(index === 0));
+                    dot.addEventListener("click", () => {
+                        pages[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+                    });
+                    repoPageControls.append(dot);
+                });
+
+                const syncPage = () => {
+                    const pageWidth = repoGrid.clientWidth || 1;
+                    const index = Math.max(0, Math.min(pages.length - 1, Math.round(repoGrid.scrollLeft / pageWidth)));
+                    repoPageControls.querySelectorAll(".repo-page-dot").forEach((dot, dotIndex) => {
+                        dot.setAttribute("aria-current", String(dotIndex === index));
+                    });
+                };
+                repoGrid.onscroll = syncPage;
+                syncPage();
+            }
         }
 
         if (filtered.length === 0) {
@@ -200,7 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             renderFilters();
             renderRepoCards();
-            setStatus(repoStatus, `공개 저장소 ${repositories.length}개를 표시합니다.`);
+            const pageCount = Math.ceil(repositories.length / 12);
+            setStatus(repoStatus, `공개 저장소 ${repositories.length}개 · ${pageCount > 1 ? "12개씩 옆으로 넘겨서 확인할 수 있습니다." : "전체를 표시합니다."}`);
 
             const missions = repositories.filter((repo) => /codyssey|mission|미션/i.test(`${repo.name} ${repo.description || ""}`));
             if (missionGrid && missions.length) {
@@ -218,6 +248,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     retryButton?.addEventListener("click", loadRepositories);
     loadRepositories();
+
+
+
+    // Repository pages: allow mouse drag as well as native touch swipe.
+    if (repoGrid) {
+        let dragging = false;
+        let startX = 0;
+        let startScroll = 0;
+
+        repoGrid.addEventListener("pointerdown", (event) => {
+            if (!repoGrid.classList.contains("is-scrollable")) return;
+            dragging = true;
+            startX = event.clientX;
+            startScroll = repoGrid.scrollLeft;
+            repoGrid.classList.add("is-dragging");
+            repoGrid.setPointerCapture?.(event.pointerId);
+        });
+        repoGrid.addEventListener("pointermove", (event) => {
+            if (!dragging) return;
+            repoGrid.scrollLeft = startScroll - (event.clientX - startX);
+        });
+        const stopDragging = (event) => {
+            if (!dragging) return;
+            dragging = false;
+            repoGrid.classList.remove("is-dragging");
+            repoGrid.releasePointerCapture?.(event.pointerId);
+            const pageWidth = repoGrid.clientWidth || 1;
+            const target = Math.round(repoGrid.scrollLeft / pageWidth) * pageWidth;
+            repoGrid.scrollTo({ left: target, behavior: "smooth" });
+        };
+        repoGrid.addEventListener("pointerup", stopDragging);
+        repoGrid.addEventListener("pointercancel", stopDragging);
+    }
 
     // Contact form: validate on input and submit.
     const form = document.querySelector("#contact-form");
