@@ -222,7 +222,37 @@ body{
 .repo-filters{gap:5px;margin-bottom:12px}
 .repo-filter{padding:4px 8px;border-color:var(--voyage-line);border-radius:3px;background:var(--voyage-paper-deep);color:var(--voyage-ink-soft);font-size:.68rem}
 .repo-filter[aria-pressed="true"]{border-color:var(--voyage-navy);background:var(--voyage-navy);color:var(--voyage-paper)}
-.repo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.repo-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    min-width:0;
+}
+.repo-grid .project-card{
+    min-width:0;
+}
+.repo-grid .project-card h4,
+.repo-grid .project-card h4 a{
+    min-width:0;
+    max-width:100%;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+.repo-grid.is-scrollable{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:2px 2px 12px;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity;
+    scrollbar-width:thin;
+}
+.repo-grid.is-scrollable .project-card{
+    flex:0 0 calc(50% - 5px);
+    scroll-snap-align:start;
+}
+
 .project-card{position:relative}
 .project-card:hover{transform:translateY(-3px);border-color:var(--voyage-navy)}
 .project-thumb{height:74px;margin:-2px -2px 12px;border:1px solid var(--voyage-line);border-radius:3px;background-color:var(--voyage-navy);background-image:linear-gradient(135deg,rgba(255,255,255,.10),transparent 50%),repeating-linear-gradient(165deg,transparent 0 13px,rgba(255,255,255,.08) 14px,transparent 15px)}
@@ -268,10 +298,19 @@ body{
  .js-ready .section,.js-ready .about-card,.js-ready .skill-group,.js-ready .project-card{opacity:1;transform:none;transition:none}
  .hero-tagline.typing::after{animation:none}
 }
-
-/* Fix long GitHub repository names overflowing their cards */
+/* GitHub repository cards stay inside their own cards, including long names. */
 .repo-grid .project-card h4,
-.projects-grid .project-card h4 {
+.repo-grid .project-card h4 a,
+.projects-grid .project-card h4,
+.projects-grid .project-card h4 a {
+    min-width: 0;
+    max-width: 100%;
     overflow-wrap: anywhere;
     word-break: break-word;
+}
+
+@media(max-width:767px){
+    .repo-grid.is-scrollable .project-card{
+        flex-basis:82%;
+    }
 }
