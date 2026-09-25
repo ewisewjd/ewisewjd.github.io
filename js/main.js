@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ? repositories
             : repositories.filter((repo) => (repo.language || "Other") === activeLanguage);
 
-        const pageSize = 12;
+        const pageSize = 8;
         const pages = [];
         repoGrid.classList.toggle("is-scrollable", filtered.length > pageSize);
 
@@ -229,8 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             renderFilters();
             renderRepoCards();
-            const pageCount = Math.ceil(repositories.length / 12);
-            setStatus(repoStatus, `공개 저장소 ${repositories.length}개 · ${pageCount > 1 ? "12개씩 옆으로 넘겨서 확인할 수 있습니다." : "전체를 표시합니다."}`);
+            const pageCount = Math.ceil(repositories.length / 8);
+            setStatus(repoStatus, `공개 저장소 ${repositories.length}개 · ${pageCount > 1 ? "8개씩 옆으로 넘겨서 확인할 수 있습니다." : "전체를 표시합니다."}`);
 
             const missions = repositories.filter((repo) => /codyssey|mission|미션/i.test(`${repo.name} ${repo.description || ""}`));
             if (missionGrid && missions.length) {
