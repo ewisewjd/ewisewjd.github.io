@@ -465,7 +465,8 @@ body{
 
     .projects-grid,
     .side-projects-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        /* Keep the mission's required auto-fit + minmax Grid pattern. */
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 18px;
     }
 
