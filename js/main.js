@@ -127,9 +127,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderRepoCards = () => {
         if (!repoGrid) return;
         repoGrid.replaceChildren();
-        const filtered = activeLanguage === "All" ? repositories : repositories.filter((repo) => (repo.language || "Other") === activeLanguage);
-        repoGrid.classList.toggle("is-scrollable", filtered.length > 8);
-        filtered.map((repo) => makeCard(repo)).forEach((card) => repoGrid.append(card));
+        const filtered = activeLanguage === "All"
+            ? repositories
+            : repositories.filter((repo) => (repo.language || "Other") === activeLanguage);
+
+        const pageSize = 12;
+        repoGrid.classList.toggle("is-scrollable", filtered.length > pageSize);
+
+        for (let start = 0; start < filtered.length; start += pageSize) {
+            const pageRepos = filtered.slice(start, start + pageSize);
+            const page = document.createElement("div");
+            page.className = "repo-page";
+            if (pageRepos.length < pageSize) page.classList.add("is-partial");
+
+            pageRepos.forEach((repo) => page.append(makeCard(repo)));
+            repoGrid.append(page);
+        }
+
         if (filtered.length === 0) {
             const empty = document.createElement("p");
             empty.textContent = "이 언어로 작성된 저장소가 없습니다.";
