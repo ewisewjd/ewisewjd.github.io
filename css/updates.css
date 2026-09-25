@@ -83,7 +83,6 @@
     }
     .theme-toggle { top: 14px; margin: 0; }
     .menu-toggle { top: 64px; display: inline-grid; }
-    .nav-menu { top: 116px; right: 16px; left: auto; width: min(250px, calc(100vw - 32px)); }
 }
 
 .contact-layout {
@@ -268,4 +267,11 @@ body{
 @media(prefers-reduced-motion:reduce){
  .js-ready .section,.js-ready .about-card,.js-ready .skill-group,.js-ready .project-card{opacity:1;transform:none;transition:none}
  .hero-tagline.typing::after{animation:none}
+}
+
+/* Fix long GitHub repository names overflowing their cards */
+.repo-grid .project-card h4,
+.projects-grid .project-card h4 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
