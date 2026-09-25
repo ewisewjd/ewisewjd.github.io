@@ -396,3 +396,123 @@ body{
         display:none;
     }
 }
+
+
+/* =========================================================
+   Card refinement: soft 3D paper cards
+   Visual-only layer: mission structure and interactions unchanged.
+   ========================================================= */
+.skill-group,
+.project-card {
+    border-radius: 20px;
+    border: 1px solid color-mix(in srgb, var(--voyage-line) 78%, white 22%);
+    background: linear-gradient(145deg, rgba(255,255,255,.56) 0%, rgba(250,247,239,.84) 48%, rgba(232,223,202,.68) 100%);
+    box-shadow: 0 12px 24px rgba(74,57,32,.13), 0 3px 7px rgba(74,57,32,.08), inset 0 1px 0 rgba(255,255,255,.72);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+[data-theme="dark"] .skill-group,
+[data-theme="dark"] .project-card {
+    border-color: color-mix(in srgb, var(--voyage-line) 82%, white 18%);
+    background: linear-gradient(145deg, rgba(39,61,73,.94) 0%, rgba(29,47,58,.96) 52%, rgba(20,35,44,.98) 100%);
+    box-shadow: 0 14px 28px rgba(0,0,0,.28), 0 3px 8px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.skill-group:hover,
+.js-ready .project-card.is-visible:hover {
+    transform: translateY(-5px);
+    border-color: var(--voyage-navy);
+    box-shadow: 0 18px 32px rgba(74,57,32,.18), 0 5px 10px rgba(74,57,32,.10), inset 0 1px 0 rgba(255,255,255,.78);
+}
+
+[data-theme="dark"] .skill-group:hover,
+[data-theme="dark"] .js-ready .project-card.is-visible:hover {
+    box-shadow: 0 18px 34px rgba(0,0,0,.36), 0 5px 11px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.skill-group::before,
+.project-card::before {
+    position: absolute;
+    inset: 1px;
+    border-radius: 19px;
+    background: linear-gradient(135deg, rgba(255,255,255,.24), transparent 38%);
+    content: "";
+    pointer-events: none;
+}
+
+.skill-group > *,
+.project-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Desktop: 4 columns × 2 rows. Smaller screens keep a compact 2-column rhythm. */
+.repo-page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, auto);
+    grid-template-rows: none;
+}
+.repo-page.is-partial {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+}
+
+@media (min-width: 1024px) {
+    .current-skills {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .projects-grid,
+    .side-projects-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .repo-page {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .repo-page.is-partial {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: minmax(0, 1fr);
+    }
+
+    .skill-group,
+    .project-card {
+        min-height: 190px;
+    }
+}
+
+@media (max-width: 767px) {
+    .repo-page,
+    .repo-page.is-partial {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: minmax(0, auto);
+        gap: 12px;
+    }
+
+    .skill-group,
+    .project-card {
+        border-radius: 18px;
+    }
+
+    .skill-group::before,
+    .project-card::before {
+        border-radius: 17px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skill-group,
+    .project-card {
+        transition: none;
+    }
+
+    .skill-group:hover,
+    .js-ready .project-card.is-visible:hover {
+        transform: none;
+    }
+}
