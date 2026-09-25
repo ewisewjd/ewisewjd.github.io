@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const makeCard = (repo, mission = false) => {
         const article = document.createElement("article");
-        article.className = "project-card";
+        article.className = "project-card is-visible";
         const title = document.createElement("h4");
         const link = document.createElement("a");
         link.href = repo.html_url;
