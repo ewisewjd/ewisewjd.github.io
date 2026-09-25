@@ -228,8 +228,8 @@ body{
 }
 .repo-page{
     display:grid;
-    grid-template-columns:repeat(6,minmax(0,1fr));
-    grid-template-rows:repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(6,minmax(0,auto));
     gap:10px;
     width:100%;
 }
@@ -244,8 +244,9 @@ body{
     padding:2px 2px 12px;
     overscroll-behavior-x:contain;
     scroll-snap-type:x mandatory;
-    scrollbar-width:thin;
+    scrollbar-width:none;
 }
+.repo-grid.is-scrollable::-webkit-scrollbar{display:none}
 .repo-grid.is-scrollable .repo-page{
     flex:0 0 100%;
     width:100%;
@@ -255,54 +256,20 @@ body{
 }
 .repo-page.is-partial{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    grid-template-rows:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(6,minmax(0,auto));
     width:100%;
 }
-.repo-grid .project-card{
-    min-width:0;
-}
+.repo-grid .project-card,
 .repo-grid .project-card h4,
 .repo-grid .project-card h4 a{
     min-width:0;
     max-width:100%;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-}
-.project-card{
-    min-width:0;
 }
 .repo-grid .project-card h4,
 .repo-grid .project-card h4 a{
-    min-width:0;
-    max-width:100%;
     overflow-wrap:anywhere;
     word-break:break-word;
 }
-.project-card{
-    min-width:0;
-}
-.repo-grid .project-card h4,
-.repo-grid .project-card h4 a{
-    min-width:0;
-    max-width:100%;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-}
-.repo-grid.is-scrollable{
-    display:flex;
-    flex-wrap:nowrap;
-    overflow-x:auto;
-    overflow-y:hidden;
-    padding:2px 2px 12px;
-    overscroll-behavior-x:contain;
-    scroll-snap-type:x proximity;
-    scrollbar-width:thin;
-}
-.repo-grid.is-scrollable .project-card{
-    flex:0 0 calc(50% - 5px);
-    scroll-snap-align:start;
-}
-
 .project-card{position:relative}
 .project-card:hover{transform:translateY(-3px);border-color:var(--voyage-navy)}
 .project-thumb{height:74px;margin:-2px -2px 12px;border:1px solid var(--voyage-line);border-radius:3px;background-color:var(--voyage-navy);background-image:linear-gradient(135deg,rgba(255,255,255,.10),transparent 50%),repeating-linear-gradient(165deg,transparent 0 13px,rgba(255,255,255,.08) 14px,transparent 15px)}
