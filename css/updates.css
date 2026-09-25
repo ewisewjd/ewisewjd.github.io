@@ -337,3 +337,62 @@ body{
         grid-template-rows:repeat(2,minmax(0,auto));
     }
 }
+
+
+/* MY PORTFOLIO | MY REPOSITORIES */
+.project-heading{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:18px;
+}
+.project-heading .subsection-heading{
+    margin:0;
+}
+.project-heading-divider{
+    color:var(--voyage-line);
+    font-family:var(--font-heading);
+    font-size:1rem;
+}
+.repo-page-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+}
+.repo-page-dot{
+    width:7px;
+    height:7px;
+    padding:0;
+    border:1px solid var(--voyage-line);
+    border-radius:50%;
+    background:transparent;
+    cursor:pointer;
+}
+.repo-page-dot[aria-current="true"]{
+    background:var(--voyage-navy);
+    border-color:var(--voyage-navy);
+}
+.repo-grid.is-scrollable{
+    cursor:grab;
+    touch-action:pan-y pinch-zoom;
+    user-select:none;
+}
+.repo-grid.is-scrollable.is-dragging{
+    cursor:grabbing;
+    scroll-snap-type:none;
+}
+@media(max-width:767px){
+    .project-heading{
+        gap:10px;
+        align-items:flex-start;
+    }
+    .project-heading .subsection-heading{
+        flex:1;
+        min-width:0;
+    }
+    .project-heading .subsection-heading span{
+        display:none;
+    }
+}
