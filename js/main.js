@@ -1,5 +1,6 @@
 /* CW. VOYAGE — interactive features */
 document.addEventListener("DOMContentLoaded", () => {
+    document.documentElement.classList.add("js-ready");
     const menuButton = document.querySelector(".menu-toggle");
     const navMenu = document.querySelector("#nav-menu");
     const themeButton = document.querySelector(".theme-toggle");
@@ -9,14 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mobile navigation
     menuButton?.addEventListener("click", () => {
         const isOpen = navMenu.classList.toggle("is-open");
+        navMenu.classList.toggle("active", isOpen);
         menuButton.setAttribute("aria-expanded", String(isOpen));
-        menuButton.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
-        menuButton.textContent = isOpen ? "×" : "☰";
+        menuButton.setAttribute("aria-label", isOpen ? "저널 메뉴 닫기" : "저널 메뉴 열기");
+        menuButton.innerHTML = isOpen
+            ? "<span aria-hidden=\"true\">×</span><span>Close</span>"
+            : "<span aria-hidden=\"true\">✣</span><span>Journal</span>";
     });
     navMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-        navMenu.classList.remove("is-open");
+        navMenu.classList.remove("is-open", "active");
         menuButton?.setAttribute("aria-expanded", "false");
-        if (menuButton) { menuButton.textContent = "☰"; menuButton.setAttribute("aria-label", "메뉴 열기"); }
+        if (menuButton) {
+            menuButton.innerHTML = "<span aria-hidden=\"true\">✣</span><span>Journal</span>";
+            menuButton.setAttribute("aria-label", "저널 메뉴 열기");
+        }
     }));
 
     // Light / dark theme preference
@@ -48,6 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollTopButton?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
     // Hero tagline uses a CSS handwriting-style reveal animation.
+    // Hero typing effect (mission bonus)
+    const heroTagline = document.querySelector(".hero-tagline");
+    if (heroTagline && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const text = heroTagline.textContent.trim();
+        heroTagline.textContent = "";
+        heroTagline.classList.add("typing");
+        let index = 0;
+        const typeNext = () => {
+            if (index < text.length) {
+                heroTagline.textContent += text[index];
+                index += 1;
+                window.setTimeout(typeNext, 75);
+            } else {
+                window.setTimeout(() => heroTagline.classList.remove("typing"), 900);
+            }
+        };
+        window.setTimeout(typeNext, 450);
+    }
+
     // Reveal sections as they enter the viewport
     const revealTargets = document.querySelectorAll(".section, .about-card, .skill-group, .project-card");
     if ("IntersectionObserver" in window) {
@@ -178,24 +204,31 @@ document.addEventListener("DOMContentLoaded", () => {
     retryButton?.addEventListener("click", loadRepositories);
     loadRepositories();
 
-    // Client-side contact form validation. No message is sent without a backend/service.
+    // Contact form: validate on input and submit.
     const form = document.querySelector("#contact-form");
+    const fields = [
+        { id: "name", errorId: "name-error", message: "이름을 입력해 주세요.", valid: (value) => value.trim().length > 0 },
+        { id: "email", errorId: "email-error", message: "올바른 이메일 주소를 입력해 주세요.", valid: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) },
+        { id: "message", errorId: "message-error", message: "메시지를 입력해 주세요.", valid: (value) => value.trim().length > 0 }
+    ];
+
+    const validateField = ({ id, errorId, message, valid }) => {
+        const input = document.getElementById(id);
+        const error = document.getElementById(errorId);
+        const okay = Boolean(input && valid(input.value));
+        if (input) input.setAttribute("aria-invalid", String(!okay));
+        if (error) error.textContent = okay ? "" : message;
+        return okay;
+    };
+
+    fields.forEach((field) => {
+        document.getElementById(field.id)?.addEventListener("input", () => validateField(field));
+    });
+
+
     form?.addEventListener("submit", (event) => {
         event.preventDefault();
-        const fields = [
-            { id: "name", errorId: "name-error", message: "이름을 입력해 주세요.", valid: (value) => value.trim().length > 0 },
-            { id: "email", errorId: "email-error", message: "올바른 이메일 주소를 입력해 주세요.", valid: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) },
-            { id: "message", errorId: "message-error", message: "메시지를 입력해 주세요.", valid: (value) => value.trim().length > 0 }
-        ];
-        let isValid = true;
-        fields.forEach(({ id, errorId, message, valid }) => {
-            const input = document.getElementById(id);
-            const error = document.getElementById(errorId);
-            const okay = Boolean(input && valid(input.value));
-            if (input) input.setAttribute("aria-invalid", String(!okay));
-            if (error) error.textContent = okay ? "" : message;
-            if (!okay) isValid = false;
-        });
+        const isValid = fields.every(validateField);
         const status = document.querySelector("#form-status");
         if (status) {
             status.className = isValid ? "success" : "error";
