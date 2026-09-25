@@ -259,6 +259,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         repoGrid.addEventListener("pointerdown", (event) => {
             if (!repoGrid.classList.contains("is-scrollable")) return;
+
+            // Repository titles are real links. Do not start the drag interaction
+            // when the user presses a link, otherwise the swipe handler can
+            // interfere with the link's normal click event.
+            if (event.target.closest("a, button")) return;
+
             dragging = true;
             startX = event.clientX;
             startScroll = repoGrid.scrollLeft;
