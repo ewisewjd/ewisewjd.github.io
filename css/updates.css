@@ -151,13 +151,9 @@ body{
 .nav-menu a:hover,.nav-menu a:focus-visible{color:var(--voyage-ink);background:var(--voyage-paper-deep)}
 .theme-toggle{order:4;border-color:var(--voyage-line);border-radius:50%;background:var(--voyage-paper)}
 .hero{
- min-height:min(820px,100svh);width:min(calc(100% - 28px),1180px);margin-inline:auto;
+ min-height:min(820px,100svh);width:100%;max-width:none;margin-inline:0;
  margin-top:calc(var(--header-height) + 16px);padding:clamp(110px,15vh,150px) clamp(28px,7vw,90px) 90px;
- border:1px solid var(--voyage-line);border-radius:5px;background-color:var(--voyage-paper);
- background-image:radial-gradient(circle at 14% 24%,transparent 0 30px,var(--voyage-map) 31px,transparent 32px),
- radial-gradient(circle at 86% 70%,transparent 0 58px,var(--voyage-map) 59px,transparent 60px),
- repeating-linear-gradient(25deg,transparent 0 120px,var(--voyage-map) 121px,transparent 122px);
- box-shadow:0 16px 38px var(--voyage-shadow);overflow:hidden;
+ border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden;
 }
 .hero::before{inset:12px;border-color:var(--voyage-line);border-radius:3px;opacity:.72}
 .hero::after{right:5%;bottom:8%;width:clamp(120px,18vw,220px);border-color:var(--voyage-map);
@@ -179,12 +175,8 @@ body{
 .scroll-link{bottom:18px;color:var(--voyage-ink-soft);gap:1px;font-family:var(--font-heading);font-size:.64rem;letter-spacing:.08em}
 .scroll-link span:first-child{font-size:.8rem}
 .section{
- position:relative;width:min(calc(100% - 28px),1180px);margin:26px auto 0;padding:clamp(56px,7vw,86px) clamp(18px,5vw,60px);
- border:1px solid var(--voyage-line);border-radius:5px;background-color:var(--voyage-paper);
- background-image:radial-gradient(circle at 92% 10%,transparent 0 44px,var(--voyage-map) 45px,transparent 46px),
- radial-gradient(circle at 8% 90%,transparent 0 36px,var(--voyage-map) 37px,transparent 38px),
- repeating-linear-gradient(145deg,transparent 0 150px,var(--voyage-map) 151px,transparent 152px);
- box-shadow:0 12px 30px var(--voyage-shadow);scroll-margin-top:calc(var(--header-height) + 28px)
+ position:relative;width:100%;max-width:none;margin:0;padding:clamp(56px,7vw,86px) clamp(18px,5vw,60px);
+ border:0;border-radius:0;background:transparent;box-shadow:none;scroll-margin-top:calc(var(--header-height) + 28px)
 }
 .section::after{position:absolute;right:20px;bottom:18px;width:64px;height:64px;border:1px solid var(--voyage-map);border-radius:50%;background:repeating-conic-gradient(from 0deg,transparent 0 15deg,var(--voyage-map) 15deg 16deg);content:"";pointer-events:none}
 .section>h2{position:relative;z-index:1;margin-bottom:6px;color:var(--voyage-ink);font-family:var(--font-heading);font-size:clamp(1.7rem,3.6vw,2.35rem);letter-spacing:.05em}
