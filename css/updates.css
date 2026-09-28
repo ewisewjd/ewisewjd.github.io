@@ -378,6 +378,15 @@ body{
     cursor:grab;
     touch-action:pan-y pinch-zoom;
     user-select:none;
+    padding-inline:0;
+    scroll-padding-inline:0;
+}
+
+.repo-grid.is-scrollable .repo-page{
+    flex:0 0 100%;
+    width:100%;
+    min-width:100%;
+    max-width:100%;
 }
 .repo-grid.is-scrollable.is-dragging{
     cursor:grabbing;
