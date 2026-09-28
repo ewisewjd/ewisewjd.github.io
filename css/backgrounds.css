@@ -1,5 +1,6 @@
-/* Voyage map artwork for journal sections and the opening Hero. */
+/* Generated voyage artwork: light/dark section backgrounds */
 
+/* Keep the page itself calm; the generated artwork belongs to the section surfaces. */
 body {
     background-color: var(--voyage-paper, #faf7ef);
     background-image: none;
@@ -10,14 +11,18 @@ html[data-theme="dark"] body {
     background-image: none;
 }
 
-/* Preserve the map's full width and avoid cover-cropping the artwork at section edges. */
+/* Full-bleed map surface, while the section's content remains centered. */
 .section {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: max(16px, calc((100% - var(--content-width)) / 2));
     background-color: var(--voyage-paper, #faf7ef);
     background-image:
         linear-gradient(rgba(250, 247, 239, 0.78), rgba(250, 247, 239, 0.78)),
         url("../assets/images/light_mode.png");
-    background-position: center top;
-    background-size: 100% auto;
+    background-position: center center;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -28,7 +33,7 @@ html[data-theme="dark"] .section {
         url("../assets/images/dark_mode.png");
 }
 
-/* The Hero now opens with the same map artwork as the journal sections. */
+/* Hero uses the same map artwork for a continuous voyage theme. */
 .hero {
     background-color: var(--voyage-paper, #faf7ef);
     background-image:
@@ -48,8 +53,9 @@ html[data-theme="dark"] .hero {
 
 @media (max-width: 767px) {
     .section {
+        padding-inline: 16px;
         background-attachment: scroll;
-        background-position: center top;
-        background-size: 100% auto;
+        background-position: center center;
+        background-size: cover;
     }
 }
