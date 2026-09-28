@@ -251,9 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 setStatus(missionStatus, "표시할 프로젝트가 없습니다.", "empty");
             }
         } catch (error) {
-            const message = error instanceof Error ? error.message : "저장소를 불러오지 못했습니다.";
-            setStatus(repoStatus, message, "error");
-            setStatus(missionStatus, message, "error");
+            console.error("GitHub API error:", error);
+            setStatus(repoStatus, "프로젝트를 불러올 수 없습니다.", "error");
+            setStatus(missionStatus, "프로젝트를 불러올 수 없습니다.", "error");
             if (retryButton) retryButton.hidden = false;
         }
     }
