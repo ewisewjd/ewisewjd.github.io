@@ -100,29 +100,27 @@ document.addEventListener("DOMContentLoaded", () => {
     let repositories = [];
     let activeLanguage = "All";
 
+    // GitHub 데이터를 템플릿 리터럴 HTML로 변환합니다.
+    // 구조분해 할당으로 카드에 필요한 값만 명시적으로 꺼냅니다.
     const makeCard = (repo, mission = false) => {
-        const article = document.createElement("article");
-        article.className = "project-card is-visible";
-        const title = document.createElement("h4");
-        const link = document.createElement("a");
-        link.href = repo.html_url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = repo.name;
-        title.append(link);
-        const description = document.createElement("p");
-        description.className = mission ? "repo-card-description" : "repo-card-description";
-        description.textContent = repo.description || "프로젝트 설명이 아직 등록되지 않았습니다.";
-        const meta = document.createElement("div");
-        meta.className = "repo-meta";
-        const language = document.createElement("span");
-        language.className = "repo-language";
-        language.textContent = repo.language || "Language 미지정";
-        const stars = document.createElement("span");
-        stars.textContent = `★ ${repo.stargazers_count ?? 0}`;
-        meta.append(language, stars);
-        article.append(title, description, meta);
-        return article;
+        const {
+            html_url,
+            name,
+            description,
+            language,
+            stargazers_count = 0
+        } = repo;
+
+        return `
+            <article class="project-card is-visible${mission ? " mission-card" : ""}">
+                <h4><a href="${html_url}" target="_blank" rel="noopener noreferrer">${name}</a></h4>
+                <p class="repo-card-description">${description || "프로젝트 설명이 아직 등록되지 않았습니다."}</p>
+                <div class="repo-meta">
+                    <span class="repo-language">${language || "Language 미지정"}</span>
+                    <span>★ ${stargazers_count}</span>
+                </div>
+            </article>
+        `;
     };
 
     const renderRepoCards = () => {
@@ -141,7 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const page = document.createElement("div");
             page.className = "repo-page";
             if (pageRepos.length < pageSize) page.classList.add("is-partial");
-            pageRepos.forEach((repo) => page.append(makeCard(repo)));
+            // map: GitHub 저장소 데이터를 카드 HTML 목록으로 변환합니다.
+            page.innerHTML = pageRepos.map((repo) => makeCard(repo)).join("");
             repoGrid.append(page);
             pages.push(page);
         }
@@ -185,7 +184,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (filtered.length === 0) {
             const empty = document.createElement("p");
-            empty.textContent = "이 언어로 작성된 저장소가 없습니다.";
+            empty.textContent = "표시할 프로젝트가 없습니다.";
+            empty.className = "repo-empty";
             repoGrid.append(empty);
         }
     };
@@ -233,8 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!Array.isArray(data)) throw new Error("저장소 응답 형식이 올바르지 않습니다.");
             repositories = data.filter((repo) => !repo.fork && !repo.archived);
             if (!repositories.length) {
-                setStatus(repoStatus, "표시할 공개 저장소가 없습니다.", "empty");
-                setStatus(missionStatus, "아직 표시할 Codyssey 미션 저장소가 없습니다.", "empty");
+                setStatus(repoStatus, "표시할 프로젝트가 없습니다.", "empty");
+                setStatus(missionStatus, "표시할 프로젝트가 없습니다.", "empty");
                 return;
             }
             renderFilters();
@@ -244,10 +244,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const missions = repositories.filter((repo) => /codyssey|mission|미션/i.test(`${repo.name} ${repo.description || ""}`));
             if (missionGrid && missions.length) {
-                missions.slice(0, 8).forEach((repo) => missionGrid.append(makeCard(repo, true)));
+                // map: 미션 저장소도 같은 카드 변환 흐름을 사용합니다.
+                missionGrid.innerHTML = missions.slice(0, 8).map((repo) => makeCard(repo, true)).join("");
                 setStatus(missionStatus, `Codyssey/미션 관련 저장소 ${missions.length}개를 찾았습니다.`);
             } else {
-                setStatus(missionStatus, "Codyssey 또는 mission이 이름·설명에 포함된 공개 저장소가 아직 없습니다.", "empty");
+                setStatus(missionStatus, "표시할 프로젝트가 없습니다.", "empty");
             }
         } catch (error) {
             const message = error instanceof Error ? error.message : "저장소를 불러오지 못했습니다.";
@@ -339,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (status) {
             status.className = isValid ? "success" : "error";
             status.textContent = isValid
-                ? "입력값이 확인되었습니다. 현재 데모 폼은 메시지를 전송하지 않습니다. 이메일 등 별도 연락 수단을 이용해 주세요."
+                ? "입력값이 확인되었습니다. 현재 데모 폼은 실제 메시지를 전송하지 않습니다."
                 : "입력 내용을 확인해 주세요.";
         }
     });
