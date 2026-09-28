@@ -152,7 +152,7 @@ body{
 .theme-toggle{order:4;border-color:var(--voyage-line);border-radius:50%;background:var(--voyage-paper)}
 .hero{
  min-height:min(820px,100svh);width:100%;max-width:none;margin-inline:0;
- margin-top:calc(var(--header-height) + 16px);padding:clamp(110px,15vh,150px) clamp(28px,7vw,90px) 90px;
+ margin-top:0;padding:clamp(110px,15vh,150px) clamp(28px,7vw,90px) 90px;
  border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden;
 }
 .hero::before{inset:12px;border-color:var(--voyage-line);border-radius:3px;opacity:.72}
