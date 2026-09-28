@@ -162,8 +162,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 const syncPage = () => {
-                    const pageWidth = repoGrid.clientWidth || 1;
-                    const index = Math.max(0, Math.min(pages.length - 1, Math.round(repoGrid.scrollLeft / pageWidth)));
+                    const scrollLeft = repoGrid.scrollLeft;
+                    let index = 0;
+                    let smallestDistance = Infinity;
+
+                    pages.forEach((page, pageIndex) => {
+                        const distance = Math.abs(page.offsetLeft - scrollLeft);
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            index = pageIndex;
+                        }
+                    });
+
                     repoPageControls.querySelectorAll(".repo-page-dot").forEach((dot, dotIndex) => {
                         dot.setAttribute("aria-current", String(dotIndex === index));
                     });
@@ -280,9 +290,21 @@ document.addEventListener("DOMContentLoaded", () => {
             dragging = false;
             repoGrid.classList.remove("is-dragging");
             repoGrid.releasePointerCapture?.(event.pointerId);
-            const pageWidth = repoGrid.clientWidth || 1;
-            const target = Math.round(repoGrid.scrollLeft / pageWidth) * pageWidth;
-            repoGrid.scrollTo({ left: target, behavior: "smooth" });
+            const pages = Array.from(repoGrid.querySelectorAll(".repo-page"));
+            if (!pages.length) return;
+
+            let targetPage = pages[0];
+            let smallestDistance = Infinity;
+
+            pages.forEach((page) => {
+                const distance = Math.abs(page.offsetLeft - repoGrid.scrollLeft);
+                if (distance < smallestDistance) {
+                    smallestDistance = distance;
+                    targetPage = page;
+                }
+            });
+
+            repoGrid.scrollTo({ left: targetPage.offsetLeft, behavior: "smooth" });
         };
         repoGrid.addEventListener("pointerup", stopDragging);
         repoGrid.addEventListener("pointercancel", stopDragging);
