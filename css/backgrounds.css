@@ -1,6 +1,5 @@
-/* Generated voyage artwork: light/dark section backgrounds */
+/* Voyage map artwork for journal sections and the opening Hero. */
 
-/* Keep the page itself calm; the generated artwork belongs to the section surfaces. */
 body {
     background-color: var(--voyage-paper, #faf7ef);
     background-image: none;
@@ -11,14 +10,14 @@ html[data-theme="dark"] body {
     background-image: none;
 }
 
-/* Generated map artwork sits behind the content of each journal section. */
+/* Preserve the map's full width and avoid cover-cropping the artwork at section edges. */
 .section {
     background-color: var(--voyage-paper, #faf7ef);
     background-image:
         linear-gradient(rgba(250, 247, 239, 0.78), rgba(250, 247, 239, 0.78)),
         url("../assets/images/light_mode.png");
-    background-position: center center;
-    background-size: cover;
+    background-position: center top;
+    background-size: 100% auto;
     background-repeat: no-repeat;
 }
 
@@ -29,17 +28,28 @@ html[data-theme="dark"] .section {
         url("../assets/images/dark_mode.png");
 }
 
-/* Keep the Hero as a clean opening page rather than putting the map artwork behind it. */
+/* The Hero now opens with the same map artwork as the journal sections. */
 .hero {
+    background-color: var(--voyage-paper, #faf7ef);
     background-image:
-        radial-gradient(circle at 14% 24%, transparent 0 30px, var(--voyage-map) 31px, transparent 32px),
-        radial-gradient(circle at 86% 70%, transparent 0 58px, var(--voyage-map) 59px, transparent 60px),
-        repeating-linear-gradient(25deg, transparent 0 120px, var(--voyage-map) 121px, transparent 122px);
+        linear-gradient(rgba(250, 247, 239, 0.68), rgba(250, 247, 239, 0.68)),
+        url("../assets/images/light_mode.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+html[data-theme="dark"] .hero {
+    background-color: var(--voyage-paper, #1a2b36);
+    background-image:
+        linear-gradient(rgba(19, 34, 44, 0.72), rgba(19, 34, 44, 0.72)),
+        url("../assets/images/dark_mode.png");
 }
 
 @media (max-width: 767px) {
     .section {
         background-attachment: scroll;
-        background-position: center center;
+        background-position: center top;
+        background-size: 100% auto;
     }
 }
