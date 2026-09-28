@@ -550,3 +550,43 @@ body{
         min-height: 190px;
     }
 }
+
+
+/* =========================================================
+   Age of Sail section separators
+   Stronger dividers keep each chapter distinct without
+   breaking the continuous map background.
+   ========================================================= */
+.hero + .section,
+.section + .section {
+    position: relative;
+    border-top: 2px solid var(--voyage-navy);
+}
+
+.hero + .section::before,
+.section + .section::before {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--voyage-navy);
+    background: var(--voyage-paper);
+    content: "";
+    transform: translateX(-50%) rotate(45deg);
+    box-shadow: 0 0 0 3px var(--voyage-paper);
+    z-index: 2;
+}
+
+[data-theme="dark"] .hero + .section::before,
+[data-theme="dark"] .section + .section::before {
+    background: var(--voyage-paper);
+    box-shadow: 0 0 0 3px var(--voyage-paper);
+}
+
+@media (max-width: 767px) {
+    .hero + .section,
+    .section + .section {
+        border-top-width: 2px;
+    }
+}
