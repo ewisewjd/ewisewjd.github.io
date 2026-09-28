@@ -727,7 +727,7 @@ if (response.status === 403) {
 
 GitHub Pages로 배포했습니다.
 
-- Repository: ew isewjd/ewisewjd.github.io
+- Repository: ewisewjd/ewisewjd.github.io
 - URL: https://ewisewjd.github.io/
 
 ---
