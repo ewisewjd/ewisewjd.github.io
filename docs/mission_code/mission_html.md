@@ -196,3 +196,157 @@ HTML 요소에 적용
 
 와 같은 식으로 이루어진다. 이것이 html 과 css 가 연결되는 최초의 핵심 지점이다. 
 
+# update.css
+
+`<link rel="stylesheet" href="css/updates.css?v=20260925-4">`
+
+이것도 css 파일이다. 그런데 뒤에 이상한게 붙어잇다. 
+
+?v=20260925-4
+이것은 파일의 이름도 아니고 쿼리 문자열이다. 
+
+쉽게 말하자면 css/updates.css.파일은 그대로인데 url을 
+
+css/updates.css?v=20260925-4
+
+로 설정하여 브라우저가 이전에 캐시해둔 파일을 계쏙 사용하는 문제를 피하기 위한 캐시버스팅 용도로 쓴것이다. 즉 
+
+내가 css를 수정했는데 브라우저가 어라? 나 예전에 받은 update.css 있는데 그거 쓰지 뭐 하는 것을 방지하고 버전처럼 뒤에 값을 붙인것 
+
+- 그렇다면 캐시버스팅은 어떻게 사용하는 것일까?
+
+# backgrounds.css
+
+`<link rel="stylesheet" href="css/backgrounds.css?v=20260928-5">`
+
+이것도 똑같이 css 연결이다. 현재 내 프로젝트 구조는 
+
+
+HTML
+ │
+ ├── style.css
+ ├── updates.css
+ └── backgrounds.css
+
+세 개의 css파일이 모두 같은 html에 적용된다. 이게 나중에 css 분석할때 중요하게 작용한다. 
+
+이유는 내가 화면을 보면서 왜 .section이 이렇게 생기지?
+
+라는 질문에 style.css 만 보면 안되고 뒤에 로드된  backgrounds.css에서 같은 선택자를 다시 덮어 쓰고 있을 수도 있기 때문이다. 
+
+css 는 단순히 파일 하나 읽으면 끝이 아니다.
+
+---
+
+# javascript 연결
+
+이것은 내가 아까 물어본 부분으로 
+
+`<script src="js/main.js?v=20260928-4" defer></script>`
+
+이건 javascript파일을 연결하는 링크이다. 
+
+index.html
+    ↓
+js/main.js
+
+그런데 여기서  defer가 발생한다. 이것은 아까 공부했던 것으로 
+
+쉽게 말하면 
+
+HTML 파싱
+    │
+    ├── main.js 다운로드 시작
+    │
+    ├── HTML 계속 파싱
+    │
+    └── HTML 파싱 완료
+             ↓
+          JS 실행
+
+
+이다
+
+defer가 없으면 일반적인 외부 script는 html 파싱을 막고 script를 실행 할 수 있다. 
+
+내 코드는 
+
+`<script src="js/main.js..." defer></script>`
+
+이므로 defer옵션이 존재한다. 따라서 html 을 읽는것과 js파일 다운로드를 효율적으로 처리하고 html 파싱이 끝난후 js를 실행하도록 
+하는 방식이다. 
+
+또한 내 main.js에는 또
+
+```
+document.addEventListener("DOMContentLoaded", () => {
+```
+
+가 존재한다. 그러니까 앞으로 js를 분석할때 defer와 DOMContentLoaded가 둘 다 있는지도 설명해야한다. 
+
+
+- domcontentloaded가 무엇인가? 어떤 기능을 하는가?
+
+---
+
+## 지금까지 질문들 
+
+1. viewport 에서 content속성은 무엇인가?
+
+브라우저에게 viewport 에 대해서 무슨 서렁을 하라는 것인지를 알려주는 것이다.
+
+반면 name은 지금 부터 내가 설명하려는 메타데이터의 종류는 viewport 이다 라고 알려주는 것이다. 
+
+즉 
+content="width=device-width, initial-scale=1.0"
+은 하나의 문자열로 보이지만 실제로는 viewport 설정 두가지를 전달하는 것이다. 
+
+그래서 contetn라는 이름이 붙은 것이다. 
+
+그렇다면 왜 굳이 content라는 속성으로 넣을까?
+
+meta태그는 일반적인 html 콘텐츠를 표시하는 태그가 아니다. 
+
+브라우저와 검색엔진에게 문서에 대한 정보를 전달하는 것이다. 
+
+그래서 meta는 대략 이런 구조를 사용한다. 
+
+`<meta name="무슨 정보인가" content="그 정보의 내용">`
+
+다만 모든 meta가 반드시 name + content구조인 것은 아니다.  charset과 같은 별도의 방식도 있다. 
+
+2. 메타 태그의 속성은 실제 영향을 주는가?
+
+그렇다 
+
+이것은 굉장히 중요한 포인트이다. html 의 속성 중에는 단순히 설명용 정보인 것도 있지만 브라우저가 실제로 읽고 행동을 바꾸는 속성도 있다. 예를 들어 
+
+브라우저가 `<meta name="viewport" content="width=device-width, initial-scale=1.0">`이것을 읽고 모바일 화면의 레이아웃 viewport를 설정한다. 
+
+이것은 브라우저가 viewport 라는 특별한 메타 정보를 인식해서 직접 동작을 변경한다. 
+
+defer 와 rel도 마찬가지다 
+
+`<link rel="stylesheet" href="css/style.css">`에서 rel="stylesheet"는 브라우저에게 이 링크가 가리키는 리소스는 stylesheet다 라고 알려주는 의미 + 동작 지시 역할을 한다. 
+
+그래서 html 속성을 공부할때는 이 속성은 단순히 이름표인가 아니면 브라우저의동작에 영향을 주는가? 를 구분하는 것이 좋다. 
+
+3. initial-scale=1.0이 100%라는 것이 무슨뜻일까?
+
+여기가 처음 보면 헷갈리는 곳이다. 
+
+흔히 initial-scale=1.0 를 100%라고 설명하는데 정확히는 100%크기로 확대/ 축소 라는 의미의 1배율이라고 이해하는 것이 좋다. 
+
+즉 
+0.5 → 0.5배
+1.0 → 1배
+2.0 → 2배
+
+이런 개념이다. 
+
+실제 예를 들어보자
+
+스마트 폰 화면의 css픽셀 기준 너비가 390이라고 해보자 
+
+viewport width = 390 CSS px
+
