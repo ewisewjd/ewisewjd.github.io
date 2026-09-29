@@ -776,17 +776,18 @@ Mission 완료 후에는 현재 코드를 다시 읽고, Mission 디렉터리의
 
 ### Desktop
 <!-- Desktop Screenshot -->
-[lightmode](./assets/images/스크린샷%20light.png)
+![lightmode](./assets/images/스크린샷%20light.png)
 
 ### Mobile
 <!-- Mobile Screenshot -->
 
-[darkmode](./assets/images/스크린샷%20mobile.png)
+![darkmode](./assets/images/스크린샷%20mobile.png)
 
 ### Dark Mode
 <!-- Dark Mode Screenshot -->
 
-[mobile](./assets/images/스크린샷%20dark.png)
+![mobile](./assets/images/스크린샷%20dark.png)
+
 ---
 
 # 15. 학습용 답변 문서
