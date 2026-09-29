@@ -350,3 +350,353 @@ defer 와 rel도 마찬가지다
 
 viewport width = 390 CSS px
 
+그리고 initial-scale=1.0라면 초기 확대 비율이 1배이다. 
+
+즉 대략 390 css px -> 390 css px라는 것이다. 
+
+그렇다면 만약 initial-scale=2.0 이라면? 초기 확대 비율이 2배이니까 화면을 두배 확대해서 보는 것에 가깝다. 
+
+반대로  initial-scale=0.5 라면 0.5 배 축소이다. 
+
+그런데 100% 라면 왜 헷갈리냐면 우리가 보통 css에서 
+
+```
+width: 100%;
+```
+라면 부모 크기의 100% 라는 뜻이다. 하지만 initial-scale=1.0 은 그런 의미가 아니다 부모의 100% 크기가 아니라는 것이다. 
+
+그냥 초기화면 확대 비율 1배 라고 이해하는게 정확하다. 
+
+4. rel은 관계 설명만 하는게 아니라 기능도 잇는가?
+
+기능이 존재한다. 웹 브라우저에서 그 관계를 실제로 해석해서 동작을 결정하기 때문에 기능적인 의미도 갖는다 예를들어 :
+`<link rel="stylesheet" href="css/style.css">`
+
+라면 브라우저 입장에서 
+
+link
+ ↓
+href에 있는 리소스가 있음
+ ↓
+rel="stylesheet"
+ ↓
+아, 이 리소스는 CSS stylesheet구나.
+ ↓
+가져와서 문서에 적용해야겠다.
+
+라고 이해하는 것이다. 
+
+rel는 여러 값이 있다. 대표적으로 stylesheet는 외부 스타일 시트 
+`<link rel="stylesheet" href="style.css">`
+
+icon은 웹 사이트 아이콘
+`<link rel="icon" href="favicon.ico">`
+
+preconnect는 해당 서버와의 연결을 미리 준비해두라는 힌트
+`<link rel="preconnect" href="https://fonts.googleapis.com">`
+
+preload는 페이지에서 곧 필요할 리소스를 미리 가져오도록 요청하는 방식
+
+```
+<link
+    rel="preload"
+    href="hero.jpg"
+    as="image"
+>
+```
+
+
+이외에도 alternate는 다른 버전의 무서나 대체 리소스를 나타내는 데 사용
+
+canonical은 seo에서 중요한 관계를 표현할때 사용 - 이 페이지의 대표 url이 무엇인지 검색엔진에게 알려주는 용도이다.
+`<link rel="canonical" href="https://example.com/page">`
+
+author는 문서의 작성자 정보와 관련된 관계를 나타낼수 있다. 
+
+그러니까 즉 rel 을 단순히 관계를 나타내는 속성이라고만 적으면 절반짜리 이해이다. 더 정확하게는  
+
+rel은 현재 문서와 href로 연결된 리소스 사이의 관계를 나타내며 브라우저는 그 관계를 해석하여 해당 리소스를 어떤 방식으로 취급할지 결정할 수있다.
+
+preconnect는 정확히 브라우저에게 나 이서버에서 뭔가 가져올거니까 미리 연결 준비해놔 라는 알림이 된다고 볼수 있겠다. 
+
+웹에서 서버와 통신하려면 그냥 데이터를 바로 받는게 아니다. 
+
+대략 
+
+브라우저
+   ↓
+DNS 확인
+   ↓
+서버 찾기
+   ↓
+네트워크 연결
+   ↓
+TLS/HTTPS 연결 준비
+   ↓
+HTTP 요청
+   ↓
+응답
+
+과 같은 과정이 필요한데 preconnect는 이 중 앞쪽의 연결 준비 비용을 미리 해두는 최적화 힌트라고 보면 된다. 
+
+crossorigin은 은 값이 없는 불리언 속성이다. 즉 crossorigin자체가 설정된거다 이건 이름 그대로 교차출처 리소스 연결과 관련이 있다. 
+
+웹에서 오리진이란 scheme+ host+port를 묶은 개념이다. 
+
+예컨대 내 사이트와 다른 사이트가 서로 다른곳에서 실행되는데 구글 폰트를 그 사이트에서 가ㅕ오게 된다면 내 사이트-> 다른 오리진 서버가 되는것이 된다. 
+
+이것을 cross origin이라고 한다. 
+
+
+crossorigin은 브라우저가 그 외부 리소스를 cross-origin방식으로 처리해야 할수 있다는 것을 명시하는 역할을 한다. 여기서 중요한것은 crossorigin을 붙인다고 보한 제한을 해제한다는 뜻은 아니라는 것이다. 
+
+브라우저의 동일 출처 정책과 cors라는 별도의 보안 매커니즘이 있고 서버가 적절한 응답 헤더를 보내야하는 경우도 있다. 일단 지금 단계에서는 
+
+cross-origin
+= 다른 출처의 리소스
+
+crossorigin
+= 그 리소스를 교차 출처 방식으로 다룰 수 있음을 명시하는 속성
+
+정도만 이해해 두자 
+
+5. google fonts 는 도대체 어떻게 가져와서 뿌려주는 것인가?
+
+처음 html 을 보면 폰트가 html 안에 들어가 잇는 건가 싶기도하다 결론은 아니다. html 자체에는 폰트가 들어있는게 아니라 google fonts서버에 잇는 css를 가져오라는 링크가 들어잇는 것이다. 
+
+실제 흐름은 대략 이렇게 된다. 
+
+네 index.html
+       │
+       │ <link rel="stylesheet"
+       ↓
+Google Fonts CSS 서버
+       │
+       │ CSS 응답
+       ↓
+브라우저
+       │
+       │ CSS 안에 있는 폰트 파일 주소 발견
+       ↓
+Google Fonts 폰트 서버
+       │
+       │ 실제 폰트 파일
+       ↓
+브라우저
+       │
+       ↓
+웹페이지 글자에 적용
+
+
+그렇다면 나도 내 폰트를 만들어서 공급할 수 있을까?
+
+당연히 가능하다
+
+그리고 이게 웹 개발에서 아주 중요한 개념이다. 내가 직접만든 폰트 파일을 가지고 있다면 서버에 올려서 
+
+```
+@font-face {
+    font-family: "MyFont";
+    src: url("/fonts/my-font.woff2") format("woff2");
+}
+```
+```
+body {
+    font-family: "MyFont", sans-serif;
+}
+```
+
+이렇게 사용할 수 잇다. 
+
+다시 말하지만 google fonts는 특별한 마법이 아니라 
+
+결국 구조는 
+
+Google
+├─ CSS 제공
+└─ 폰트 파일 제공
+이고 나도 서버를 가지고 있따면 같은 구조를 만들수 있다는 것이다. 
+
+6. 이 두 api와 html 간 통신은 어떤 방식인가?
+
+우선 api라는 표현을 구분할 필요가 있다. 지금 html의 google fonts부분은 일반적으로 rest api호출과는 다르다. 
+
+반면 나중에 혹여라도 자바스크립트에서 fetch("https://api.github.com/users/ewisewjd/repos")
+
+하는 것은 실제 github api요청이다. 그래서 둘을 나눠 봐야한다. 
+
+`<link rel="stylesheet" href="https://fonts.googleapis.com/...">`이것은 브라우저가 외부 css 리소스를 요청하는 것이다. 
+
+HTML
+ ↓
+`<link>`
+ ↓
+브라우저가 HTTP 요청
+ ↓
+Google 서버
+ ↓
+CSS 응답
+ ↓
+브라우저
+
+반면 js에서 fetch(`https://api.github.com/users/${username}/repos?...`)는 자바스크립트가 직접 http요청을 발생시키는 것이다.
+
+JavaScript
+   ↓
+fetch()
+   ↓
+HTTP 요청
+   ↓
+GitHub API 서버
+   ↓
+JSON 응답
+   ↓
+JavaScript
+   ↓
+DOM 변경
+   ↓
+화면에 카드 표시
+
+이 둘의 차이가 굉장히 중요하다. 
+
+즉 나의 프로젝트에서는 두가지 외부 통신 방식을 동시에 경험하고 잇는 것이다.
+
+7. 캐시버스팅은 어떻게 사용하는 거소 값은 무엇인가?
+
+`<link rel="stylesheet" href="css/updates.css?v=20260925-4">`
+
+여기서 ?v=20260925-4가 캐시 버스팅을 위한 캐시 버스팅 쿼리 스트링이다. 
+
+왜 필요하냐
+
+브라우저는 성능때문에 css/js같은 파일을 캐시에 저장한다. 
+
+예를 들어 처음 방문햇을때는
+
+index.html
+   ↓
+style.css
+   ↓
+다운로드
+   ↓
+브라우저 캐시
+
+형식으로 저장된다. 그런데 내가 style.css를 수정했다고 쳐보자 
+
+서버에는 새 버전이 되엇지만 브라우저가 "나 style.css 이미 갖고 있는데?" 하면서 예전 파일을 사용할 수 있다.
+
+때문에 url을 updates.css?v=1 이런식으로 바꾸면 브라우저 입장에서는 url이 달라진다. 그러니까 새로운 파일을 가져오게 될 가능성이 높다.
+
+그렇다면 뒤에 들어간 값은 무슨 공식인가?
+
+정해진 값을 나타내는 공식은 없다. 
+
+이것은 개발자가 임의로 정한 이름과 문자열이다. 
+이것은 웹 표준은 아니다. 
+
+8. DOMContentLoaded가 무엇인가?
+이제 자바스크립트 쪽으로 넘어가보자 
+
+내 코드의 맨 위 document.addEventListener("DOMContentLoaded", () => { 이것을 이해하면 js코드가 왜 이렇게 시작하는지도 이해된다. 
+
+dom이 뭘까?
+
+dom이란 DOM = Document Object Model 으로 html을 브라워가 읽어서 js가 다룰수 잇는 객체구조로 만든것이라고 생각하면된다.
+
+```
+<body>
+    <h1>Hello</h1>
+    <button>Click</button>
+</body>
+```
+
+이것을 브라우저는 
+
+document
+└── html
+    └── body
+        ├── h1
+        │   └── "Hello"
+        └── button
+            └── "Click"
+
+와 같은 구조로 만드는 것이다. 이게 DOM이다.
+
+DOMContentLoaded는  html 문서를 브라우저가 전부 파싱해서 DOM을 완성햇을때 발생하는 이벤트이다. 
+
+그래서 
+
+```
+document.addEventListener("DOMContentLoaded", () => {
+    // 여기부터 HTML DOM을 조작
+});
+```
+
+는 사실상 html 구조를 다 읽은 다음 이 코드를 실행해라 라는 뜻이다. 
+
+왜 이게 필요할까 예를들어 js가 html 보다 머너 실행된다면? 브라우저 입장에서는 
+
+JavaScript 실행
+ ↓
+#hello 찾음
+ ↓
+아직 HTML을 안 읽었음
+ ↓
+없는데?
+ ↓
+null
+
+이 될수 있다. 
+
+따라서 
+
+```
+document.addEventListener("DOMContentLoaded", () => {
+    const button = document.querySelector("#hello");
+});
+```
+
+HTML 읽기
+ ↓
+DOM 생성
+ ↓
+DOMContentLoaded 발생
+ ↓
+JS 실행
+ ↓
+#hello 찾음
+ ↓
+있음
+
+가 되는 것이다. 그런데 내 코드에는 defer도 있었다.
+
+`<script src="js/main.js?v=20260928-4" defer></script>`
+document.addEventListener("DOMContentLoaded", () => {
+
+둘다 존재하는 것이다. 
+
+그렇다면 defer와 DOMContentLoaded을 왜 같이 쓸까? 이건 중요한 부분이다. defer자체가 html 파싱이 끝난뒤 스크립트를 실행하도록 보장해주기 때문에 이 코드에서는 DOMContentLoaded가 사실상 추가적인 안전 / 구조적 진입점 역할을 수행하고 있다 
+
+즉 즈금 나의 코드는
+```
+HTML
+ ↓
+<script defer>
+ ↓
+HTML 파싱 계속
+ ↓
+DOM 완성
+ ↓
+DOMContentLoaded
+ ↓
+main.js의 콜백 실행
+
+```
+
+이라고 보면된다. 다만 defer와 DOMContentLoaded는 같은 기능이 아니다. 
+
+defer → 스크립트 로딩/실행 시점을 제어하는 `<script>` 속성
+DOMContentLoaded → DOM이 완성됐다는 브라우저 이벤트
+
+이 차이는 반드시 구분해 두는 것이 좋다. 
+
